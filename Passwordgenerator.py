@@ -1,11 +1,17 @@
+import os
 print("\nWelcome to Random Password Generator!")
 print("please select the option / options you want!")
-print("Eg. : For Letters and Numbers Enter '12' \n\n")
+print("Eg. : For Letters and Numbers Enter '1' press enter then input '2' \n\n")
+print("after you finish selecting enter'5'\n ")
 
-select = int(input("1.Letters\n2.Numbers\n3.Signs\n4.Caps\n\n"))
+option = ["1.Letters","2.Numbers","3.Signs","4.Caps","5.Done"]
+for x in option:
+		print(x)
 
-if(select == 1):
+select = []
+while( choise != 5):
+	choise = int(input("Please enter:"))
+	select.append(choise) 
 	print(select)
 
-
-
+		
