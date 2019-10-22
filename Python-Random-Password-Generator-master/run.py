@@ -1,10 +1,7 @@
-#!/usr/bin/env python
-# -*- conding:utf-8 -*-
-
 import os
 import string
 import random
-
+import base64
 
 def random_password_generator(size):
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
@@ -37,7 +34,18 @@ def random_password_generator_logon():
             return True
     else:
         print("Username Not Found!!")
-
+def random_password_generator_encryptout(password):
+    m =0
+    for x in password:
+        m = str(m) + str(ord(x))
+        m = str(m)
+    m = int(m)
+    n= 7441826991206406709576923798652306546773056383923657355748125433921170166237822700978602733318243198872391448038717383645273135292865009135623454648457251152479774667822283716405812196213269778591708092613681639094858652600822484100505704226715130775144353675554189536174751655752733823725881192996003709612306625816000913962672752947794794592929812789552418862834752848089722689574309164356302742239632448304296692333917423975797637051507227100217475335583330661060121209180098107074150139550375959262626119833501770072868699207069770140058936323994415274097579352438105654231135473547937006233631692474761658579637
+    e=6553
+    encrypt_password = str(pow(m,e,n))
+    encodedBytes = base64.b64encode(encrypt_password.encode("utf-8"))
+    encodedStr = str(encodedBytes, "utf-8")
+    return encodedStr
 #Running
 random_password_generator_ico()
 sel = int(input("Please log on or Create a new account.\n1.logon\n2.Create new account\n"))
@@ -45,8 +53,11 @@ if(sel == 1):
     if(random_password_generator_logon()):
         opt = int(input("Please select the function\n1.Create new password\n2.Open password safe\n "))
         size = int(input("Please Enter Length of Password\n"))
-        if(size<30):
-            print("Password : " + random_password_generator(size))
+        if(size<50):
+            pwd = random_password_generator(size)
+            print("Password : " + pwd)
+            print("encrypt_password"+str(random_password_generator_encryptout(pwd)))
+
         else:
             print("Password too long, are you sure about that ??")
         
