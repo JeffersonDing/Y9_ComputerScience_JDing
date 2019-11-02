@@ -2,6 +2,7 @@ import random
 import string
 
 file1 = open("Dirty_Information.txt","a+") 
+
 first_names = ['Aurelio', 'Caldwell', 'Jeannie', 'Cardenas', 'Miranda', 'Barton', 'Bernard', 'Vincent', 'Lisa', 'Gibson', 'Valeria', 'Camacho', 'Devon', 'Morales', 'Jon', 'Haney', 'Michel', 'Rojas', 'Manual', 'Li','John', 'Jane', 'Corey', 'Travis', 'Dave', 'Kurt', 'Neil', 'Sam', 'Steve', 'Tom', 'James', 'Robert', 'Michael', 'Charles', 'Joe', 'Mary', 'Maggie', 'Nicole', 'Patricia', 'Linda', 'Barbara', 'Elizabeth', 'Laura', 'Jennifer', 'Maria']
 
 last_names = [ 'Delia', ' Chiacchia', ' Prasad', ' Brookshire', ' Miko', ' Ghellini', ' Muth', ' Newfield', ' Bye', ' Semuels', ' Mccredie massion', ' Dobrzycki', ' Barsky', ' Mazzola', ' Langille', ' Arenas', ' Chandler', ' Griliches', ' Georges', ' Crosier', ' Hauser', ' Kegan', ' Hlynka', ' Sanicola', ' Kronauge', ' Polverini', ' Allyn', ' Roudebush', ' Zirilli', ' Liebling', ' Merrow', ' Shedden', ' Lim', ' Pourahmadi', ' Merdita', ' Gollin', ' Hellmiss', ' Rasmussen', ' Bradach', ' St andre', ' Fader', ' Weinberg', ' Cheadle', ' Hendrix', ' Ostrower', ' Tappan', ' Konz', ' Dumas', ' Lopes', ' Welsch', ' Guay', ' Tulikangas', ' Staples', ' Runyon', ' Spacks', ' Goodale', ' Kalman','Smith', 'Doe', 'Jenkins', 'Robinson', 'Davis', 'Stuart', 'Jefferson', 'Jacobs', 'Wright', 'Patterson', 'Wilks', 'Arnold', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin']
