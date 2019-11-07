@@ -1,0 +1,32 @@
+from tkinter import *
+root = Tk()
+Letter = BooleanVar()
+Numbers= BooleanVar()
+Caps= BooleanVar()
+Special_Characters= BooleanVar()
+Easy_to_Read= BooleanVar()
+Easy_to_Memorize= BooleanVar()
+
+cbLetters = Checkbutton(text="Letters", variable=Letter,onvalue = True, offvalue = False, height = 5,width = 15)
+cbNumbers = Checkbutton(text="Numbers", variable=Numbers,onvalue = True, offvalue = False, height = 5,width = 15)
+cbCaps = Checkbutton(text="Caps", variable=Caps,onvalue = True, offvalue = False, height = 5,width = 15)
+cbSpecial = Checkbutton(text="Special Characters", variable=Special_Characters,onvalue = True, offvalue = False, height = 5,width = 15)
+cbEasyR = Checkbutton(text="Easy to Read", variable=Easy_to_Read,onvalue = True, offvalue = False, height = 5,width = 15)
+cbEasyM = Checkbutton(text="Easy to Memorize", variable=Easy_to_Memorize,onvalue = True, offvalue = False, height = 5,width = 15)
+lbTitle = Label(text = "Random Password Generator")
+lbPassword = Entry(text = "Pleas Enter Password")
+btnGo = Button(text = "Go !")
+lbTitle.()
+lbPassword.grid(side = LEFT)
+btnGo.grid(side = RIGHT)
+cbSpecial.grid(row = 2,column = 0)
+cbCaps.grid(side=LEFT)
+cbNumbers.grid(side=LEFT)
+cbLetters.grid(side=LEFT)
+cbEasyR.grid(side=LEFT)
+cbEasyM.grid(side=LEFT)
+cbSpecial.grid(side=LEFT)
+
+
+
+root.mainloop()

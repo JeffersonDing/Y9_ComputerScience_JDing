@@ -9,6 +9,7 @@ def Encrypt():
 		cipher.append(pow(ord(x),e,n))
 	stv.set(cipher)
 	print("Encrypted")
+
 def Decrypt():
 	global cipher
 	decryption=[]
@@ -21,6 +22,7 @@ def Decrypt():
 	print("Decrypted")
 	stv.set(plaintext)
 	cipher=[]
+
 root = Tk()
 file1 = open("Interface.txt","a+") 
 stv = StringVar()
