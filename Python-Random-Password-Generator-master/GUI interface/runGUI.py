@@ -2,6 +2,7 @@ from tkinter import *
 import string
 import random
 from functools import partial
+import random
 root = Tk()
 #Variable Declariation 
 Letter = BooleanVar()
@@ -9,7 +10,6 @@ Numbers= BooleanVar()
 Caps= BooleanVar()
 Special_Characters= BooleanVar()
 Easy_to_Read= BooleanVar()
-Easy_to_Memorize= BooleanVar()
 
 Generate = StringVar()
 Size = IntVar()
@@ -18,7 +18,7 @@ Password = StringVar()
 Memo = StringVar()
 SUsername = StringVar()
 SMemo = StringVar()
-
+word = []
 chars = []
 special = '!@#$%&_-?'
 #Button Functions
@@ -48,10 +48,15 @@ def appendS():
 		chars.append(special)
 	else:
 		chars.remove(special)
+def Easy():
+	global word
+	if(Easy_to_Read.get()==True):
+		for i in range(0,Size.get()):
+			word.append(random.choice(open('English_noun.txt').readlines()).strip('\n'))
 def Create():
 	selection = ''.join(chars)
 	Generate.set(''.join(random.choice(selection) for x in range(0, Size.get())))
-
+	
 def Fill():
 	Password.set(Generate.get())
 
