@@ -1,5 +1,4 @@
 from tkinter import *
-import string
 import random
 from functools import partial
 import random
@@ -20,42 +19,70 @@ SUsername = StringVar()
 SMemo = StringVar()
 word = []
 chars = []
-special = '!@#$%&_-?'
+generate = []
+special = ['!','@','#','$','%','&_','-','?']
+ascii_uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+ascii_lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
 #Button Functions
+def removeList(b):
+	for i in b:
+		chars.remove(i)
 def appendLU():
 	global chars
 	if(Letter.get() == True):
-		chars.append(string.ascii_lowercase)
+		chars.extend(ascii_lowercase)
 	else:
-		chars.remove(string.ascii_lowercase)
+		removeList(ascii_lowercase)
 
 def appendLL():
 	global chars
 	if(Caps.get() == True):
-		chars.append(string.ascii_uppercase)
+		chars.extend(ascii_uppercase)
 	else:
-		chars.remove(string.ascii_uppercase)
+		removeList(ascii_uppercase)
 
 def appendN():
 	global chars
 	if(Numbers.get() == True):
-		chars.append(string.digits)
+		chars.extend(digits)
 	else:
-		chars.remove(string.digits)
+		removeList(digits)
 def appendS():
 	global chars
 	if(Special_Characters.get() == True):
-		chars.append(special)
+		chars.extend(special)
 	else:
-		chars.remove(special)
+		removeList(special)
 def Easy():
+	global chars
 	global word
 	if(Easy_to_Read.get()==True):
-		for i in range(0,Size.get()):
+		word = []
+		for i in range(0,26):
 			word.append(random.choice(open('English_noun.txt').readlines()).strip('\n'))
+		print(word)
+		chars.extend(word)
+	else:
+		removeList(word)
+def Refresh():
+	global chars
+	global word
+	if(Easy_to_Read.get()==True):
+		word = []
+		for i in range(0,26):
+			word.append(random.choice(open('English_noun.txt').readlines()).strip('\n'))
+		print(word)
+		chars.extend(word)
+	else:
+		return
 def Create():
-	selection = ''.join(chars)
-	Generate.set(''.join(random.choice(selection) for x in range(0, Size.get())))
+	global generate
+	generate = []
+	for i in range(0,Size.get()):
+		generate.append(random.choice(chars))
+	Generate.set(''.join(generate))
 	
 def Fill():
 	Password.set(Generate.get())
@@ -75,16 +102,18 @@ cb.append(Checkbutton(generatorf,text="Letters", variable=Letter,onvalue = True,
 cb.append(Checkbutton(generatorf,text="Numbers", variable=Numbers,onvalue = True, offvalue = False, height = 2,width = 15,command = appendN))
 cb.append(Checkbutton(generatorf,text="Caps", variable=Caps,onvalue = True, offvalue = False, height = 2,width = 15,command = appendLL))
 cb.append(Checkbutton(generatorf,text="Special Characters", variable=Special_Characters,onvalue = True, offvalue = False, height = 2,width = 15,command = appendS))
-cb.append(Checkbutton(generatorf,text="Easy to Read", variable=Easy_to_Read,onvalue = True, offvalue = False, height = 2,width = 15))
+cb.append(Checkbutton(generatorf,text="Easy to Read", variable=Easy_to_Read,onvalue = True, offvalue = False, height = 2,width = 15,command = Easy))
 lbGSize = Label(generatorf,text = "Size")
 lbGTitle = Label(generatorf,text = "Random Password Generator")
 EtGPassword = Entry(generatorf,text = "Pleas Enter Password",textvariable = Generate)
 btnGGo = Button(generatorf,text = "Go !",command = Create )
+btnGRefresh = Button(generatorf,text = "Refresh",command = Refresh )
 lbGSize.grid(row =2,column = 1)
 EtGSize.grid(row = 2,column = 0)
 lbGTitle.grid(row = 0,column = 0)
 EtGPassword.grid(row = 1, column = 0)
 btnGGo.grid(row = 1, column = 1)
+btnGRefresh.grid(row = 7,column = 1)
 for x in range(0,5):
 	cb[x].grid(row = x+3, column = 0)
 
