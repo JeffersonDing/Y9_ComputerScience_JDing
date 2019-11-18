@@ -9,7 +9,7 @@ n=744182699120640670957692379865230654677305638392365735574812543392117016623782
 e=6553
 d=4165515245497497300584183807943943295218002566188306909947218692449695127385981026581644258478760270633897731024876447918642127308748489777119919372888935941903832364042749377655504217260838325633203919381502251213175879404824793480948408836195803400462305704552535818508925541477342845326801803129763712323707922729320122183190848453201638965312192858220393090816213720436537019479473566613916791146451770874471143677665974186271603566727889259702727174612886772425044819676162383477897768349836907574509704980372425128806961289095835294370498521487628563707891665120639474055335033475762900708067357970775016255657
 #Variable Declariation 
-vault = open("User_Data.txt","a+")
+vault = open("User_Data.txt","r+")
 Letter = BooleanVar()
 Numbers= BooleanVar()
 Caps= BooleanVar()
@@ -90,7 +90,16 @@ def Encrypt_Save():
 		cipher.append(str(pow(ord(x),e,n)))
 	vault.write(str('\t'.join(cipher)))
 
-
+def Decrypt_Display():
+	text = ''.join (vault.readlines(1)).split('\t')
+	decryption=[]
+	plaintextset=[]
+	for y in text:
+		decryption.append(pow(int(y),d,n))
+	for char in decryption:
+		plaintextset.append(chr(char))
+	plaintext=''.join(plaintextset)
+	print(plaintext)
 #Frame Creation
 generatorf = Frame(root)
 vaultf = Frame(root)
@@ -142,7 +151,7 @@ LbMUsername=Label(managerf,text = "Username")
 EntMUsername =  Entry(managerf,text = "Username...",textvariable = SUsername)
 LbMMemo=Label(managerf,text = "Memo")
 EntMMemo = Entry(managerf,text = "Memo ...",textvariable = SMemo)
-BtnMSearch = Button(managerf,text = "Search ! ")
+BtnMSearch = Button(managerf,text = "Search ! ",command = Decrypt_Display)
 LbMResult=Label(managerf,text = "Passwords information will display here ...")
 LbMSearch.grid(row = 0, column = 0,columnspan = 2)
 LbMUsername.grid(row = 1, column =0 )
