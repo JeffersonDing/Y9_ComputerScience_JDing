@@ -3,6 +3,14 @@ import random
 from functools import partial
 import random
 root = Tk()
+import csv
+import fnmatch
+#Colour Theme
+#CSV config
+User_Data = open('User_Data.csv', 'a+')
+fieldnames = ['Username', 'Memo','Password']
+User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
+User_Data_Reader = csv.DictReader(User_Data)
 #RSA Encryption
 cipher = []
 n=7441826991206406709576923798652306546773056383923657355748125433921170166237822700978602733318243198872391448038717383645273135292865009135623454648457251152479774667822283716405812196213269778591708092613681639094858652600822484100505704226715130775144353675554189536174751655752733823725881192996003709612306625816000913962672752947794794592929812789552418862834752848089722689574309164356302742239632448304296692333917423975797637051507227100217475335583330661060121209180098107074150139550375959262626119833501770072868699207069770140058936323994415274097579352438105654231135473547937006233631692474761658579637
@@ -33,6 +41,20 @@ ascii_lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', '
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 #Button Functions
+def Search():
+	User_Data = open('User_Data.csv', 'r+')
+	User_Data_Reader = csv.DictReader(User_Data)
+	for row in User_Data_Reader:
+		if(fnmatch.fnmatch(row['Username'],f'*{SUsername.get()}*')):
+			SUsername.set(row['Username'])
+			SMemo.set(row['Memo'])
+			Decrypt_Display(row['Password'])
+	for row in User_Data_Reader:
+		if(fnmatch.fnmatch(row['Memo'],f'*{SMemo.get()}*')):
+			SUsername.set(row['Username'])
+			SMemo.set(row['Memo'])
+			Decrypt_Display(row['Password'])
+	User_Data.close()
 def removeList(b):
 	try:
 		for i in b:
@@ -81,28 +103,29 @@ def Create():
 	for i in range(0,Size.get()):
 		generate.append(random.choice(chars))
 	Generate.set(''.join(generate))
-	print(chars)
 	
 def Fill():
 	Password.set(Generate.get())
 
 def Encrypt_Save():
-	vault = open("User_Data.txt","r+")
-	plaintext=Password.get()
-	
-	for x in plaintext:
-		cipher.append(str(pow(ord(x),e,n)))
-	vault.write(Username.get()+'//'+Memo.get()+'///'+str('\t'.join(cipher)))
-	vault.close()
-	Password.set('Saved')
-	Username.set('Saved')
-	Memo.set('Saved')
-
-def Decrypt_Display():
-	vault = open("User_Data.txt","r+")
-	text = ''.join(vault.readlines(1)).split('\t')
+	if(Password.get()!= '' and Username.get()!='' and Memo.get()!= '' and Password.get()!= 'Saved' and Password.get()!= 'Please input'):
+		User_Data = open('User_Data.csv', 'a+')
+		plaintext=Password.get()
+		for x in plaintext:
+			cipher.append(str(pow(ord(x),e,n)))
+		User_Data_Writer.writerow({'Username':Username.get(),'Memo':Memo.get(),'Password':str('\t'.join(cipher))})
+		Password.set('Saved')
+		Username.set('Saved')
+		Memo.set('Saved')
+		User_Data.close()
+	else:
+		Password.set('Please input')
+		Username.set('Please input')
+		Memo.set('Please input')
+def Decrypt_Display(a):
 	decryption=[]
 	plaintextset=[]
+	text = a.split('\t')
 	for y in text:
 		q = int(y)
 		decryption.append(pow(q,d,n))
@@ -110,9 +133,6 @@ def Decrypt_Display():
 		plaintextset.append(chr(char))
 	plaintext=''.join(plaintextset)
 	SPassword.set(plaintext)
-	vault.close()
-def Search_Decrypt_Display():
-	vault = open("User_Data.txt","r+")
 #Frame Creation
 generatorf = Frame(root)
 vaultf = Frame(root)
@@ -164,7 +184,7 @@ LbMUsername=Label(managerf,text = "Username")
 EntMUsername =  Entry(managerf,text = "Username...",textvariable = SUsername)
 LbMMemo=Label(managerf,text = "Memo")
 EntMMemo = Entry(managerf,text = "Memo ...",textvariable = SMemo)
-BtnMSearch = Button(managerf,text = "Search ! ",command = Decrypt_Display)
+BtnMSearch = Button(managerf,text = "Search ! ",command = Search)
 LbMResult=Label(managerf,text = "Passwords information will display here ...",textvariable = SPassword)
 LbMSearch.grid(row = 0, column = 0,columnspan = 2)
 LbMUsername.grid(row = 1, column =0 )
@@ -175,6 +195,6 @@ EntMUsername.grid(row = 1, column = 1)
 EntMMemo.grid(row =2 , column = 1)
 #Frame Pack
 generatorf.grid(row =0 , column = 0 )
-#vaultf.grid(row =0 , column = 1)
-#managerf.grid(row = 1, column =1 )
+vaultf.grid(row =0 , column = 1)
+managerf.grid(row = 1, column =1 )
 root.mainloop()

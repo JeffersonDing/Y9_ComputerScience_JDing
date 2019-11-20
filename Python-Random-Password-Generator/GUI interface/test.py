@@ -1,3 +1,8 @@
+import csv
 import fnmatch
-str = ['jeff','ord','sup','ext','jjjjjjoeffarsert','helllo']
-print(fnmatch.filter(str,'*eff*'))
+csvfile = open('User_Data.csv', 'r+')
+fieldnames = ['Username', 'Memo','Password']
+writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+reader = csv.reader(csvfile)
+for row in reader:
+	print(row)
