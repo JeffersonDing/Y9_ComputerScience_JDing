@@ -139,7 +139,7 @@ def Decrypt_Display(a):
 generatorf = Frame(root)
 vaultf = Frame(root)
 managerf = Frame(root)
-
+Mainf = Frame(root)
 #Generator Frame Create and Configure
 cb = []
 EtGSize = Entry(generatorf,text="Size",textvariable = Size)
@@ -149,16 +149,10 @@ cb.append(Checkbutton(generatorf,text="Caps", variable=Caps,onvalue = True, offv
 cb.append(Checkbutton(generatorf,text="Special Characters", variable=Special_Characters,onvalue = True, offvalue = False, height = 2,width = 15,command = appendS))
 cb.append(Checkbutton(generatorf,text="Easy to Read", variable=Easy_to_Read,onvalue = True, offvalue = False, height = 2,width = 15))
 lbGSize = Label(generatorf,text = "Size")
-lbGTitle = Label(generatorf,text = "Random Password Generator")
-EtGPassword = Entry(generatorf,text = "Pleas Enter Password",textvariable = Generate)
-btnGGo = Button(generatorf,text = "Go !",command = Create )
-lbGSize.grid(row =2,column = 1)
-EtGSize.grid(row = 2,column = 0)
-lbGTitle.grid(row = 0,column = 0)
-EtGPassword.grid(row = 1, column = 0)
-btnGGo.grid(row = 1, column = 1)
+lbGSize.grid(row =0,column = 1)
+EtGSize.grid(row = 0,column = 0)
 for x in range(0,5):
-	cb[x].grid(row = x+3, column = 0)
+	cb[x].grid(row = x+1, column = 0)
 
 
 #Vault Frame Create and Configure
@@ -195,8 +189,18 @@ BtnMSearch.grid(row =3 , column = 0,columnspan = 2)
 LbMResult.grid(row = 1, column = 3,rowspan = 3)
 EntMUsername.grid(row = 1, column = 1)
 EntMMemo.grid(row =2 , column = 1)
+
+#Main Frame Configure
+Mainf.configure(height = 20,width = 150)
+Title = Label(Mainf,text = "Random Password Generator",font=("Times", 32))
+EtGPassword = Entry(Mainf,text = "Pleas Enter Password",textvariable = Generate)
+btnGGo = Button(Mainf,text = "Go !",command = Create )
+EtGPassword.grid(row = 1, column = 0)
+btnGGo.grid(row = 1, column = 1)
+Title.grid(row = 0,column = 0,columnspan = 2)
 #Frame Pack
-generatorf.grid(row =0 , column = 0 )
-vaultf.grid(row =0 , column = 1)
-managerf.grid(row = 1, column =1 )
+Mainf.grid(row = 0,column = 0,columnspan = 2)
+generatorf.grid(row =1 , column = 0 )
+vaultf.grid(row =1 , column = 1)
+managerf.grid(row = 2, column =0,columnspan =2 )
 root.mainloop()
