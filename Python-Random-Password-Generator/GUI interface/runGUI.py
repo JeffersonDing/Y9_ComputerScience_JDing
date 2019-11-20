@@ -1,3 +1,4 @@
+#import packages
 from tkinter import *
 import random
 from functools import partial
@@ -6,6 +7,8 @@ root = Tk()
 import csv
 import fnmatch
 #Colour Theme
+
+
 #CSV config
 User_Data = open('User_Data.csv', 'a+')
 fieldnames = ['Username', 'Memo','Password']
@@ -39,20 +42,19 @@ special = ['!','@','#','$','%','&_','-','?','!','@','#','$','%','&_','-','?','!'
 ascii_uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 ascii_lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-
 #Button Functions
 def Search():
 	User_Data = open('User_Data.csv', 'r+')
 	User_Data_Reader = csv.DictReader(User_Data)
+	if(SUsername.get()==''):
+		SUsername.set(' ')
+	elif(SMemo.get()==''):
+		SMemo.set(' ')
 	for row in User_Data_Reader:
-		if(fnmatch.fnmatch(row['Username'],f'*{SUsername.get()}*')):
+		if(fnmatch.fnmatch(row['Username'],f'*{SUsername.get()}*') or fnmatch.fnmatch(row['Memo'],f'*{SMemo.get()}*')):
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
-			Decrypt_Display(row['Password'])
-	for row in User_Data_Reader:
-		if(fnmatch.fnmatch(row['Memo'],f'*{SMemo.get()}*')):
-			SUsername.set(row['Username'])
-			SMemo.set(row['Memo'])
+			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo'])
 			Decrypt_Display(row['Password'])
 	User_Data.close()
 def removeList(b):
@@ -132,7 +134,7 @@ def Decrypt_Display(a):
 	for char in decryption:
 		plaintextset.append(chr(char))
 	plaintext=''.join(plaintextset)
-	SPassword.set(plaintext)
+	SPassword.set(SPassword.get()+'\n'+'Password: '+plaintext)
 #Frame Creation
 generatorf = Frame(root)
 vaultf = Frame(root)
