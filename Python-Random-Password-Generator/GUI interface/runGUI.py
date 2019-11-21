@@ -67,20 +67,16 @@ ascii_lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', '
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 #Button Functions
 def Search():
-	print('gole')
 	root.clipboard_clear()
 	User_Data = open('User_Data.csv', 'r+')
 	User_Data_Reader = csv.DictReader(User_Data)
 	for row in User_Data_Reader:
-		print('gole')
 		if(row['Username']==SUsername.get()):
-			print('gole')
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
 			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
 			Decrypt_Display(row['Password'])
 		if(row['Memo']==SMemo.get()):
-			print('gole')
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
 			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
