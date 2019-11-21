@@ -5,9 +5,15 @@ from functools import partial
 import random
 import csv
 import os
+from pynput.keyboard import Key,Controller
+import time
 root = Tk()
-#Colour Theme
 
+#Colour Theme
+Sunshine = '#ffd280'
+Steel_Blue = '#426E86'
+Bone = '#F8F1E5'
+Honey = '#EB8A3E'
 
 #CSV config
 User_Data = open('User_Data.csv', 'a+')
@@ -20,13 +26,25 @@ n=744182699120640670957692379865230654677305638392365735574812543392117016623782
 e=6553
 d=4165515245497497300584183807943943295218002566188306909947218692449695127385981026581644258478760270633897731024876447918642127308748489777119919372888935941903832364042749377655504217260838325633203919381502251213175879404824793480948408836195803400462305704552535818508925541477342845326801803129763712323707922729320122183190848453201638965312192858220393090816213720436537019479473566613916791146451770874471143677665974186271603566727889259702727174612886772425044819676162383477897768349836907574509704980372425128806961289095835294370498521487628563707891665120639474055335033475762900708067357970775016255657
 #Variable Declariation 
-
+def random_password_generator_ico():
+    random_password_generator_ico = """
+    #############################################################
+    #                  Random Password Generetor                #
+    #                                                           #
+    #             DEVELOPER :Jeofo                              #
+    #          E-Mail Address : jefferson.ding@ucc.on.ca        #
+    #               Teacher : Mr. Miskew                        #
+    #                                                           #
+    #############################################################
+    """
+    print(random_password_generator_ico)
+keyboard=Controller()
+autofillbuffer = ''
 Letter = BooleanVar()
 Numbers= BooleanVar()
 Caps= BooleanVar()
 Special_Characters= BooleanVar()
 Easy_to_Read= BooleanVar()
-
 Generate = StringVar()
 Size = IntVar()
 Username = StringVar()
@@ -35,6 +53,7 @@ Memo = StringVar()
 SUsername = StringVar()
 SMemo = StringVar()
 SPassword = StringVar()
+PasswordO = StringVar()
 word = []
 chars = []
 generate = []
@@ -50,14 +69,13 @@ def Search():
 		if(row['Username']==SUsername.get()):
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
-			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo'])
+			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
 			Decrypt_Display(row['Password'])
 		if(row['Memo']==SMemo.get()):
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
-			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo'])
+			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
 			Decrypt_Display(row['Password'])
-	User_Data.close()
 def removeList(b):
 	try:
 		for i in b:
@@ -120,7 +138,6 @@ def Encrypt_Save():
 		Password.set('Saved')
 		Username.set('Saved')
 		Memo.set('Saved')
-		User_Data.close()
 	else:
 		Password.set('Please input')
 		Username.set('Please input')
@@ -135,7 +152,7 @@ def Decrypt_Display(a):
 	for char in decryption:
 		plaintextset.append(chr(char))
 	plaintext=''.join(plaintextset)
-	SPassword.set(SPassword.get()+'\n'+'Password: '+plaintext)
+	PasswordO.set(plaintext)
 def Decrypt(a):
 	decryption=[]
 	plaintextset=[]
@@ -158,20 +175,35 @@ def Open_Vault():
 	User_Data.close()
 	Secret_Vault.close()
 	os.system("open Secret_Vault.csv")
-#Frame Creation
+def AutoFill():
+	root.clipboard_append(PasswordO.get())
+	if(PasswordO.get()==''):
+		q = SUsername.get()
+		SUsername.set("No Data to AutoFill")
+		time.sleep(1)
+		SUsername.set(q)
+	else:
+		time.sleep(3)
+		for a in PasswordO.get():
+			keyboard.press(a)
+			keyboard.release(a)
+#Frame Creation and Configure
 generatorf = Frame(root)
+generatorf.configure(background = Bone)
 vaultf = Frame(root)
+vaultf.configure(background =Bone)
 managerf = Frame(root)
+managerf.configure(background = Bone)
 Mainf = Frame(root)
 #Generator Frame Create and Configure
 cb = []
-EtGSize = Entry(generatorf,text="Size",textvariable = Size)
-cb.append(Checkbutton(generatorf,text="Letters", variable=Letter,onvalue = True, offvalue = False, height = 2,width = 15,command = appendLU))
-cb.append(Checkbutton(generatorf,text="Numbers", variable=Numbers,onvalue = True, offvalue = False, height = 2,width = 15,command = appendN))
-cb.append(Checkbutton(generatorf,text="Caps", variable=Caps,onvalue = True, offvalue = False, height = 2,width = 15,command = appendLL))
-cb.append(Checkbutton(generatorf,text="Special Characters", variable=Special_Characters,onvalue = True, offvalue = False, height = 2,width = 15,command = appendS))
-cb.append(Checkbutton(generatorf,text="Easy to Read", variable=Easy_to_Read,onvalue = True, offvalue = False, height = 2,width = 15))
-lbGSize = Label(generatorf,text = "Size")
+EtGSize = Entry(generatorf,text="Size",textvariable = Size,background = 'white')
+cb.append(Checkbutton(generatorf,text="Letters", variable=Letter,onvalue = True, offvalue = False, height = 2,width = 15,command = appendLU,background = Bone))
+cb.append(Checkbutton(generatorf,text="Numbers", variable=Numbers,onvalue = True, offvalue = False, height = 2,width = 15,command = appendN,background = Bone))
+cb.append(Checkbutton(generatorf,text="Caps", variable=Caps,onvalue = True, offvalue = False, height = 2,width = 15,command = appendLL,background = Bone))
+cb.append(Checkbutton(generatorf,text="Special Characters", variable=Special_Characters,onvalue = True, offvalue = False, height = 2,width = 15,command = appendS,background = Bone))
+cb.append(Checkbutton(generatorf,text="Easy to Read", variable=Easy_to_Read,onvalue = True, offvalue = False, height = 2,width = 15,background = Bone))
+lbGSize = Label(generatorf,text = "Size",background = Bone)
 lbGSize.grid(row =0,column = 1)
 EtGSize.grid(row = 0,column = 0)
 for x in range(0,5):
@@ -179,15 +211,15 @@ for x in range(0,5):
 
 
 #Vault Frame Create and Configure
-LbVPassword = Label(vaultf,text = "Password")
-EtVPassword = Entry(vaultf,text = "Password ... ",textvariable = Password)
-LbVUsername =Label(vaultf,text = "Username")
-EtVUsername = Entry(vaultf,text = "Username ... ",textvariable = Username)
-LbVMemo = Label(vaultf,text = "Memo")
-EtVMemo = Entry(vaultf,text = "Memo ...",textvariable = Memo)
-BtnVSave = Button(vaultf,text = "Save !",command = Encrypt_Save)
-BtnVFill = Button(vaultf,text = "Fill from Generator",command = Fill)
-LbVPassword.grid(row = 1, column = 0)
+LbVPassword = Label(vaultf,text = "Password",background = Sunshine)
+EtVPassword = Entry(vaultf,text = "Password ... ",textvariable = Password,background = 'white')
+LbVUsername =Label(vaultf,text = "Username",background = Sunshine)
+EtVUsername = Entry(vaultf,text = "Username ... ",textvariable = Username,background = 'white')
+LbVMemo = Label(vaultf,text = "   Memo   ",background = Sunshine)
+EtVMemo = Entry(vaultf,text = "Memo ...",textvariable = Memo,background = 'white')
+BtnVSave = Button(vaultf,text = "Save !",command = Encrypt_Save,background = Honey)
+BtnVFill = Button(vaultf,text = "Fill from Generator",command = Fill,background = Honey)
+LbVPassword.grid(row = 1, column = 0,padx = 10,pady = 10)
 EtVPassword.grid(row = 1, column = 1)
 LbVUsername.grid(row =0 , column =0)
 EtVUsername.grid(row = 0, column = 1)
@@ -198,34 +230,49 @@ BtnVFill.grid(row = 1,column = 2)
 
 #Password Manager Create and Configure
 
-LbMSearch = Label(managerf,text = "Search in Vault")
-LbMUsername=Label(managerf,text = "Username")
+LbMSearch = Label(managerf,text = "   Search in Vault   ",bg = Sunshine,font=('',15))
+LbMUsername=Label(managerf,text = "Username",bg = Sunshine)
 EntMUsername =  Entry(managerf,text = "Username...",textvariable = SUsername)
-LbMMemo=Label(managerf,text = "Memo")
+LbMMemo=Label(managerf,text = "   Memo   ",bg = Sunshine)
 EntMMemo = Entry(managerf,text = "Memo ...",textvariable = SMemo)
 BtnMSearch = Button(managerf,text = "Search ! ",command = Search)
-LbMResult=Label(managerf,text = "Passwords information will display here ...",textvariable = SPassword)
+SPassword.set('Password will display here')
+LbMResult=Label(managerf,text = "Passwords information will display here ...",textvariable = SPassword,bg = Sunshine)
+PasswordO.set('    Password...    ')
+LbMPasswordO = Label(managerf,textvariable = PasswordO,bg = Sunshine)
+BtnMAutoFill = Button(managerf,text = "AutoFill",command =  AutoFill)
 BtnMOpenVault = Button(managerf,text = "Open Vault",command = Open_Vault)
 LbMSearch.grid(row = 0, column = 0,columnspan = 2)
 LbMUsername.grid(row = 1, column =0 )
 LbMMemo.grid(row = 2, column = 0)
 BtnMSearch.grid(row =3 , column = 0)
-LbMResult.grid(row = 1, column = 3,rowspan = 3)
+LbMResult.grid(row = 1, column = 3,rowspan = 2)
 EntMUsername.grid(row = 1, column = 1)
 EntMMemo.grid(row =2 , column = 1)
 BtnMOpenVault.grid(row =3 ,column =1 )
+BtnMAutoFill.grid(row = 3,column = 2)
+LbMPasswordO.grid(row = 3,column = 3,padx = 6,pady = 6)
+
 #Main Frame Configure
-Mainf.configure(height = 20,width = 150)
-Title = Label(Mainf,text = "Random Password Generator",font=("Times", 32))
-EtGPassword = Entry(Mainf,text = "Pleas Enter Password",textvariable = Generate)
-btnGGo = Button(Mainf,text = "Go !",command = Create )
+Mainf.configure(height = 20,width = 150,background = Bone)
+Title = Label(Mainf,text = "Random Password Generator",font=("Times", 32),background = Bone)
+EtGPassword = Entry(Mainf,text = "Pleas Enter Password",textvariable = Generate,background = 'white')
+btnGGo = Button(Mainf,text = "Go !",command = Create,bg = Sunshine)
 EtGPassword.grid(row = 1, column = 0)
 btnGGo.grid(row = 1, column = 1)
 Title.grid(row = 0,column = 0,columnspan = 2)
-#Frame Pack
+
+
+#Frame Pack and final configure
+root.configure(background = Bone)
 Mainf.grid(row = 0,column = 0,columnspan = 2)
 generatorf.grid(row =1 , column = 0 )
 vaultf.grid(row =1 , column = 1)
-managerf.grid(row = 2, column =0,columnspan =2 )
+managerf.grid(row = 2, column =0,columnspan = 2 )
+
 root.mainloop()
-os.remove('Secret_Vault.csv')
+try:
+	os.remove('Secret_Vault.csv')
+	random_password_generator_ico()
+except:
+	random_password_generator_ico()

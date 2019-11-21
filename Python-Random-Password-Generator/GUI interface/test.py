@@ -1,8 +1,15 @@
 import csv
-import fnmatch
+from pynput.keyboard import Key,Controller
+import time
+keyboard=Controller()
 csvfile = open('User_Data.csv', 'r+')
 fieldnames = ['Username', 'Memo','Password']
-writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-reader = csv.reader(csvfile)
+reader = csv.DictReader(csvfile)
+str = "Hello this is a test"
+time.sleep(3)
 for row in reader:
-	print(row)
+	for a in row['Username']:
+		keyboard.press(a)
+		keyboard.release(a)
+	keyboard.press('\n')
+	keyboard.release('\n')
