@@ -16,10 +16,14 @@ Bone = '#F8F1E5'
 Honey = '#EB8A3E'
 
 #CSV config
-User_Data = open('User_Data.csv', 'a+')
+User_Data = open('User_Data.csv', 'r+')
 fieldnames = ['Username', 'Memo','Password']
 User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
 User_Data_Reader = csv.DictReader(User_Data)
+datb  = User_Data.readlines(1)
+if(datb!=['Username,Memo,Password\n']):
+	User_Data_Writer.writeheader()
+User_Data.close()
 #RSA Encryption
 cipher = []
 n=7441826991206406709576923798652306546773056383923657355748125433921170166237822700978602733318243198872391448038717383645273135292865009135623454648457251152479774667822283716405812196213269778591708092613681639094858652600822484100505704226715130775144353675554189536174751655752733823725881192996003709612306625816000913962672752947794794592929812789552418862834752848089722689574309164356302742239632448304296692333917423975797637051507227100217475335583330661060121209180098107074150139550375959262626119833501770072868699207069770140058936323994415274097579352438105654231135473547937006233631692474761658579637
@@ -63,19 +67,25 @@ ascii_lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', '
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 #Button Functions
 def Search():
+	print('gole')
+	root.clipboard_clear()
 	User_Data = open('User_Data.csv', 'r+')
 	User_Data_Reader = csv.DictReader(User_Data)
 	for row in User_Data_Reader:
+		print('gole')
 		if(row['Username']==SUsername.get()):
+			print('gole')
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
 			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
 			Decrypt_Display(row['Password'])
 		if(row['Memo']==SMemo.get()):
+			print('gole')
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
 			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
 			Decrypt_Display(row['Password'])
+	User_Data.close()
 def removeList(b):
 	try:
 		for i in b:
@@ -129,8 +139,10 @@ def Fill():
 	Password.set(Generate.get())
 
 def Encrypt_Save():
+	User_Data = open('User_Data.csv', 'a+')
+	fieldnames = ['Username', 'Memo','Password']
+	User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
 	if(Password.get()!= '' and Username.get()!='' and Memo.get()!= '' and Password.get()!= 'Saved' and Password.get()!= 'Please input'):
-		User_Data = open('User_Data.csv', 'a+')
 		plaintext=Password.get()
 		for x in plaintext:
 			cipher.append(str(pow(ord(x),e,n)))
@@ -142,6 +154,7 @@ def Encrypt_Save():
 		Password.set('Please input')
 		Username.set('Please input')
 		Memo.set('Please input')
+	User_Data.close()
 def Decrypt_Display(a):
 	decryption=[]
 	plaintextset=[]
@@ -166,13 +179,12 @@ def Decrypt(a):
 
 def Open_Vault():
 
-	User_Data = open('User_Data.csv', 'r+')
+	User_Data = open('User_Data.csv', 'a+')
 	User_Data_Reader = csv.DictReader(User_Data)
 	Secret_Vault = open('Secret_Vault.csv', 'a+') 
 	Secret_Vault_Writer = csv.DictWriter(Secret_Vault, fieldnames=fieldnames)
 	for row in User_Data_Reader:
 		Secret_Vault_Writer.writerow({'Username':row['Username'],'Memo':row['Memo'],'Password':Decrypt(row['Password'])})
-	User_Data.close()
 	Secret_Vault.close()
 	os.system("open Secret_Vault.csv")
 def AutoFill():
