@@ -24,6 +24,7 @@ datb  = User_Data.readlines(1)
 if(datb!=['Username,Memo,Password\n']):
 	User_Data_Writer.writeheader()
 User_Data.close()
+
 #RSA Encryption
 cipher = []
 n=7441826991206406709576923798652306546773056383923657355748125433921170166237822700978602733318243198872391448038717383645273135292865009135623454648457251152479774667822283716405812196213269778591708092613681639094858652600822484100505704226715130775144353675554189536174751655752733823725881192996003709612306625816000913962672752947794794592929812789552418862834752848089722689574309164356302742239632448304296692333917423975797637051507227100217475335583330661060121209180098107074150139550375959262626119833501770072868699207069770140058936323994415274097579352438105654231135473547937006233631692474761658579637
@@ -65,6 +66,10 @@ special = ['!','@','#','$','%','&_','-','?','!','@','#','$','%','&_','-','?','!'
 ascii_uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 ascii_lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+logonUsername = StringVar()
+logonPassword = StringVar()
+
 #Button Functions
 def Search():
 	root.clipboard_clear()
@@ -195,6 +200,34 @@ def AutoFill():
 		for a in PasswordO.get():
 			keyboard.press(a)
 			keyboard.release(a)
+def Logon():
+	filename = logonUsername.get()+'_User.csv'
+	if(os.path.isfile(filename)):
+		Logon_Data = open(filename,'r+')
+		logonfield = ['Username','Password']
+		Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
+		Logon_Data_Reader = csv.DictReader(Logon_Data)
+		for row in Logon_Data_Reader:
+
+			if(logonUsername.get() == Decrypt(row['Username']) and logonPassword.get() == Decrypt(row['Password'])):
+			
+				Logonf.pack_forget()
+				Mainf.grid(row = 0,column = 0,columnspan = 2)
+				generatorf.grid(row =1 , column = 0 )
+				vaultf.grid(row =1 , column = 1)
+				managerf.grid(row = 2, column =0,columnspan = 2 )
+			else:
+				logonPassword.set('Please try again!')
+def Register():
+	Logon_Data = open('Logon_Data.csv','r+')
+	logonfield = ['Username','Password']
+	Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
+	Logon_Data_Reader = csv.DictReader(Logon_Data)
+	datc  = Logon_Data.readlines(1)
+	if(datc!=['Username,Password\n']):
+		Logon_Data_Writer.writeheader()
+	Logon_Data.close()
+	
 #Frame Creation and Configure
 generatorf = Frame(root)
 generatorf.configure(background = Bone)
@@ -203,6 +236,7 @@ vaultf.configure(background =Bone)
 managerf = Frame(root)
 managerf.configure(background = Bone)
 Mainf = Frame(root)
+Logonf = Frame(root)
 #Generator Frame Create and Configure
 cb = []
 EtGSize = Entry(generatorf,text="Size",textvariable = Size,background = 'white')
@@ -216,6 +250,22 @@ lbGSize.grid(row =0,column = 1)
 EtGSize.grid(row = 0,column = 0)
 for x in range(0,5):
 	cb[x].grid(row = x+1, column = 0)
+
+#Logon Frame Create and Configure
+lbLTitle = Label(Logonf,text = "RPG Logon")
+lbLUser = Label(Logonf,text = 'Username')
+lbLPass = Label(Logonf,text = 'Password')
+EntLUser = Entry(Logonf,textvariable = logonUsername)
+EntLPass = Entry(Logonf,textvariable = logonPassword)
+BtnLGo = Button(Logonf,text = 'Logon',command = Logon)
+BtnLRegister = Button(Logonf,text = 'Register',command = Register)
+lbLTitle.grid(row = 0,column =0,columnspan = 2)
+lbLUser.grid(row = 1,column =0 )
+lbLPass.grid(row =2 ,column = 0)
+EntLUser.grid(row =1 ,column = 1)
+EntLPass.grid(row =2 ,column = 1)
+BtnLGo.grid(row = 3,column =1) 
+BtnLRegister.grid(row = 3,column =0) 
 
 
 #Vault Frame Create and Configure
@@ -273,11 +323,11 @@ Title.grid(row = 0,column = 0,columnspan = 2)
 
 #Frame Pack and final configure
 root.configure(background = Bone)
-Mainf.grid(row = 0,column = 0,columnspan = 2)
-generatorf.grid(row =1 , column = 0 )
-vaultf.grid(row =1 , column = 1)
-managerf.grid(row = 2, column =0,columnspan = 2 )
 
+
+
+
+Logonf.pack()
 root.mainloop()
 try:
 	os.remove('Secret_Vault.csv')
