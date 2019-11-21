@@ -3,9 +3,9 @@ from tkinter import *
 import random
 from functools import partial
 import random
-root = Tk()
 import csv
-import fnmatch
+import os
+root = Tk()
 #Colour Theme
 
 
@@ -46,12 +46,13 @@ digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '
 def Search():
 	User_Data = open('User_Data.csv', 'r+')
 	User_Data_Reader = csv.DictReader(User_Data)
-	if(SUsername.get()==''):
-		SUsername.set(' ')
-	elif(SMemo.get()==''):
-		SMemo.set(' ')
 	for row in User_Data_Reader:
-		if(fnmatch.fnmatch(row['Username'],f'*{SUsername.get()}*') or fnmatch.fnmatch(row['Memo'],f'*{SMemo.get()}*')):
+		if(row['Username']==SUsername.get()):
+			SUsername.set(row['Username'])
+			SMemo.set(row['Memo'])
+			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo'])
+			Decrypt_Display(row['Password'])
+		if(row['Memo']==SMemo.get()):
 			SUsername.set(row['Username'])
 			SMemo.set(row['Memo'])
 			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo'])
@@ -135,6 +136,28 @@ def Decrypt_Display(a):
 		plaintextset.append(chr(char))
 	plaintext=''.join(plaintextset)
 	SPassword.set(SPassword.get()+'\n'+'Password: '+plaintext)
+def Decrypt(a):
+	decryption=[]
+	plaintextset=[]
+	text = a.split('\t')
+	for y in text:
+		q = int(y)
+		decryption.append(pow(q,d,n))
+	for char in decryption:
+		plaintextset.append(chr(char))
+	return(''.join(plaintextset))
+
+def Open_Vault():
+
+	User_Data = open('User_Data.csv', 'r+')
+	User_Data_Reader = csv.DictReader(User_Data)
+	Secret_Vault = open('Secret_Vault.csv', 'a+') 
+	Secret_Vault_Writer = csv.DictWriter(Secret_Vault, fieldnames=fieldnames)
+	for row in User_Data_Reader:
+		Secret_Vault_Writer.writerow({'Username':row['Username'],'Memo':row['Memo'],'Password':Decrypt(row['Password'])})
+	User_Data.close()
+	Secret_Vault.close()
+	os.system("open Secret_Vault.csv")
 #Frame Creation
 generatorf = Frame(root)
 vaultf = Frame(root)
@@ -182,14 +205,15 @@ LbMMemo=Label(managerf,text = "Memo")
 EntMMemo = Entry(managerf,text = "Memo ...",textvariable = SMemo)
 BtnMSearch = Button(managerf,text = "Search ! ",command = Search)
 LbMResult=Label(managerf,text = "Passwords information will display here ...",textvariable = SPassword)
+BtnMOpenVault = Button(managerf,text = "Open Vault",command = Open_Vault)
 LbMSearch.grid(row = 0, column = 0,columnspan = 2)
 LbMUsername.grid(row = 1, column =0 )
 LbMMemo.grid(row = 2, column = 0)
-BtnMSearch.grid(row =3 , column = 0,columnspan = 2)
+BtnMSearch.grid(row =3 , column = 0)
 LbMResult.grid(row = 1, column = 3,rowspan = 3)
 EntMUsername.grid(row = 1, column = 1)
 EntMMemo.grid(row =2 , column = 1)
-
+BtnMOpenVault.grid(row =3 ,column =1 )
 #Main Frame Configure
 Mainf.configure(height = 20,width = 150)
 Title = Label(Mainf,text = "Random Password Generator",font=("Times", 32))
@@ -204,3 +228,4 @@ generatorf.grid(row =1 , column = 0 )
 vaultf.grid(row =1 , column = 1)
 managerf.grid(row = 2, column =0,columnspan =2 )
 root.mainloop()
+os.remove('Secret_Vault.csv')
