@@ -15,16 +15,6 @@ Steel_Blue = '#426E86'
 Bone = '#F8F1E5'
 Honey = '#EB8A3E'
 
-#CSV config
-User_Data = open('User_Data.csv', 'r+')
-fieldnames = ['Username', 'Memo','Password']
-User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
-User_Data_Reader = csv.DictReader(User_Data)
-datb  = User_Data.readlines(1)
-if(datb!=['Username,Memo,Password\n']):
-	User_Data_Writer.writeheader()
-User_Data.close()
-
 #RSA Encryption
 cipher = []
 n=7441826991206406709576923798652306546773056383923657355748125433921170166237822700978602733318243198872391448038717383645273135292865009135623454648457251152479774667822283716405812196213269778591708092613681639094858652600822484100505704226715130775144353675554189536174751655752733823725881192996003709612306625816000913962672752947794794592929812789552418862834752848089722689574309164356302742239632448304296692333917423975797637051507227100217475335583330661060121209180098107074150139550375959262626119833501770072868699207069770140058936323994415274097579352438105654231135473547937006233631692474761658579637
@@ -69,11 +59,12 @@ digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '1', '2', '3', '
 
 logonUsername = StringVar()
 logonPassword = StringVar()
-
+destination = StringVar()
+personalvault = StringVar()
 #Button Functions
 def Search():
 	root.clipboard_clear()
-	User_Data = open('User_Data.csv', 'r+')
+	User_Data = open(destination.get(), 'r+')
 	User_Data_Reader = csv.DictReader(User_Data)
 	for row in User_Data_Reader:
 		if(row['Username']==SUsername.get()):
@@ -138,9 +129,13 @@ def Create():
 	
 def Fill():
 	Password.set(Generate.get())
-
+def Encrypt(a):
+	encryptmp = []
+	for x in a:
+		encryptmp.append(str(pow(ord(x),e,n)))
+	return '\t'.join(encryptmp)
 def Encrypt_Save():
-	User_Data = open('User_Data.csv', 'a+')
+	User_Data = open(destination.get(), 'a+')
 	fieldnames = ['Username', 'Memo','Password']
 	User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
 	if(Password.get()!= '' and Username.get()!='' and Memo.get()!= '' and Password.get()!= 'Saved' and Password.get()!= 'Please input'):
@@ -180,14 +175,15 @@ def Decrypt(a):
 
 def Open_Vault():
 
-	User_Data = open('User_Data.csv', 'a+')
+	User_Data = open(destination.get(), 'r+')
 	User_Data_Reader = csv.DictReader(User_Data)
-	Secret_Vault = open('Secret_Vault.csv', 'a+') 
-	Secret_Vault_Writer = csv.DictWriter(Secret_Vault, fieldnames=fieldnames)
+	personalvault.set('Users/'+logonUsername.get()+'/'+logonUsername.get()+'_Vault.csv')
+	Secret_Vault = open(personalvault.get(), 'a+') 
+	Secret_Vault_Writer = csv.DictWriter(Secret_Vault, fieldnames=['Username','Memo','Password'])
 	for row in User_Data_Reader:
 		Secret_Vault_Writer.writerow({'Username':row['Username'],'Memo':row['Memo'],'Password':Decrypt(row['Password'])})
 	Secret_Vault.close()
-	os.system("open Secret_Vault.csv")
+	os.system(f'open {personalvault.get()}')
 def AutoFill():
 	root.clipboard_append(PasswordO.get())
 	if(PasswordO.get()==''):
@@ -201,33 +197,37 @@ def AutoFill():
 			keyboard.press(a)
 			keyboard.release(a)
 def Logon():
-	filename = logonUsername.get()+'_User.csv'
-	if(os.path.isfile(filename)):
-		Logon_Data = open(filename,'r+')
+	directory = 'Users/'+logonUsername.get()
+	if(os.path.isdir(directory)):
+		destination.set(directory+'/'+logonUsername.get()+'_User.csv')
+		Logon_Data = open('Logon_Data.csv','r+')
 		logonfield = ['Username','Password']
-		Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
 		Logon_Data_Reader = csv.DictReader(Logon_Data)
+		Logon_Data_Writer = csv.DictWriter(Logon_Data,fieldnames=['Username','Password'])
 		for row in Logon_Data_Reader:
-
-			if(logonUsername.get() == Decrypt(row['Username']) and logonPassword.get() == Decrypt(row['Password'])):
-			
+			if(logonUsername.get() == row['Username'] and logonPassword.get() == Decrypt(row['Password'])):
 				Logonf.pack_forget()
 				Mainf.grid(row = 0,column = 0,columnspan = 2)
 				generatorf.grid(row =1 , column = 0 )
 				vaultf.grid(row =1 , column = 1)
 				managerf.grid(row = 2, column =0,columnspan = 2 )
-			else:
-				logonPassword.set('Please try again!')
 def Register():
-	Logon_Data = open('Logon_Data.csv','r+')
-	logonfield = ['Username','Password']
-	Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
-	Logon_Data_Reader = csv.DictReader(Logon_Data)
-	datc  = Logon_Data.readlines(1)
-	if(datc!=['Username,Password\n']):
-		Logon_Data_Writer.writeheader()
-	Logon_Data.close()
-	
+	directory = 'Users/'+logonUsername.get()
+	if(os.path.isdir(directory)):
+		logonUsername.set('Please Logon')
+	else:
+		os.mkdir(directory)
+		destination.set(directory+'/'+logonUsername.get()+'_User.csv')
+		Logon_Data = open('Logon_Data.csv','a+')
+		logonfield = ['Username','Password']
+		Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
+		Logon_Data_Writer.writerow({'Username':logonUsername.get(),'Password':Encrypt(logonPassword.get())})
+		Logon_Data.close()
+
+		User_Data = open(destination.get(), 'w+')
+		fieldnames = ['Username', 'Memo','Password']
+		User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
+		User_Data_Writer.writeheader()
 #Frame Creation and Configure
 generatorf = Frame(root)
 generatorf.configure(background = Bone)
@@ -314,12 +314,13 @@ LbMPasswordO.grid(row = 3,column = 3,padx = 6,pady = 6)
 #Main Frame Configure
 Mainf.configure(height = 20,width = 150,background = Bone)
 Title = Label(Mainf,text = "Random Password Generator",font=("Times", 32),background = Bone)
+Account = Label(Mainf,textvariable = logonUsername,font = ("Times",10),bg = Bone)
 EtGPassword = Entry(Mainf,text = "Pleas Enter Password",textvariable = Generate,background = 'white')
 btnGGo = Button(Mainf,text = "Go !",command = Create,bg = Sunshine)
 EtGPassword.grid(row = 1, column = 0)
+Account.grid(row = 0,column = 1)
 btnGGo.grid(row = 1, column = 1)
-Title.grid(row = 0,column = 0,columnspan = 2)
-
+Title.grid(row = 0,column = 0)
 
 #Frame Pack and final configure
 root.configure(background = Bone)
@@ -330,7 +331,7 @@ root.configure(background = Bone)
 Logonf.pack()
 root.mainloop()
 try:
-	os.remove('Secret_Vault.csv')
+	os.remove(personalvault.get())
 	random_password_generator_ico()
 except:
 	random_password_generator_ico()
