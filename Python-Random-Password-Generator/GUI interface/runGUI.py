@@ -1,8 +1,6 @@
 #import packages
 from tkinter import *
 import random
-from functools import partial
-import random
 import csv
 import os
 from pynput.keyboard import Key,Controller
@@ -211,6 +209,8 @@ def Logon():
 				generatorf.grid(row =1 , column = 0 )
 				vaultf.grid(row =1 , column = 1)
 				managerf.grid(row = 2, column =0,columnspan = 2 )
+	else:
+		logonUsername.set('Please Register!!')
 def Register():
 	directory = 'Users/'+logonUsername.get()
 	if(os.path.isdir(directory)):
@@ -324,10 +324,6 @@ Title.grid(row = 0,column = 0)
 
 #Frame Pack and final configure
 root.configure(background = Bone)
-
-
-
-
 Logonf.pack()
 root.mainloop()
 try:
