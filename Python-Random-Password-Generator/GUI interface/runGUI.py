@@ -61,173 +61,235 @@ destination = StringVar()
 personalvault = StringVar()
 #Button Functions
 def Search():
-	root.clipboard_clear()
-	User_Data = open(destination.get(), 'r+')
-	User_Data_Reader = csv.DictReader(User_Data)
-	for row in User_Data_Reader:
-		if(row['Username']==SUsername.get()):
-			SUsername.set(row['Username'])
-			SMemo.set(row['Memo'])
-			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
-			Decrypt_Display(row['Password'])
-		if(row['Memo']==SMemo.get()):
-			SUsername.set(row['Username'])
-			SMemo.set(row['Memo'])
-			SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
-			Decrypt_Display(row['Password'])
-	User_Data.close()
+	try:
+		root.clipboard_clear()
+		User_Data = open(destination.get(), 'r+')
+		User_Data_Reader = csv.DictReader(User_Data)
+		for row in User_Data_Reader:
+			if(row['Username']==SUsername.get()):
+				SUsername.set(row['Username'])
+				SMemo.set(row['Memo'])
+				SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
+				Decrypt_Display(row['Password'])
+			if(row['Memo']==SMemo.get()):
+				SUsername.set(row['Username'])
+				SMemo.set(row['Memo'])
+				SPassword.set('Username: '+row['Username']+'\n'+'Memo: '+row['Memo']+'\n'+'Password: ')
+				Decrypt_Display(row['Password'])
+		User_Data.close()
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def removeList(b):
 	try:
-		for i in b:
-			chars.remove(i)
+		try:
+			for i in b:
+				chars.remove(i)
+		except:
+			print("None to remove")
 	except:
-		print("None to remove")
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def appendLU():
-	global chars
-	if(Letter.get() == True):
-		chars.extend(ascii_lowercase)
-	else:
-		removeList(ascii_lowercase)
-
+	try:
+		global chars
+		if(Letter.get() == True):
+			chars.extend(ascii_lowercase)
+		else:
+			removeList(ascii_lowercase)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def appendLL():
-	global chars
-	if(Caps.get() == True):
-		chars.extend(ascii_uppercase)
-	else:
-		removeList(ascii_uppercase)
-
+	try:
+		global chars
+		if(Caps.get() == True):
+			chars.extend(ascii_uppercase)
+		else:
+			removeList(ascii_uppercase)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def appendN():
-	global chars
-	if(Numbers.get() == True):
-		chars.extend(digits)
-	else:
-		removeList(digits)
+	try:
+		global chars
+		if(Numbers.get() == True):
+			chars.extend(digits)
+		else:
+			removeList(digits)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def appendS():
-	global chars
-	if(Special_Characters.get() == True):
-		chars.extend(special)
-	else:
-		removeList(special)
+	try:
+		global chars
+		if(Special_Characters.get() == True):
+			chars.extend(special)
+		else:
+			removeList(special)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def Create():
-	global generate
-	global chars
-	global word
-	generate = []
-	if(Easy_to_Read.get()==False):
-		removeList(word)
-	elif(Easy_to_Read.get()==True):
-		removeList(word)
-		word = []
-		for i in range(0,26):
-			word.append(random.choice(open('English_noun.txt').readlines()).strip('\n'))
-		chars.extend(word)
-	for i in range(0,Size.get()):
-		generate.append(random.choice(chars))
-	Generate.set(''.join(generate))
-	
+	try:
+		global generate
+		global chars
+		global word
+		generate = []
+		if(Easy_to_Read.get()==False):
+			removeList(word)
+		elif(Easy_to_Read.get()==True):
+			removeList(word)
+			word = []
+			for i in range(0,26):
+				word.append(random.choice(open('English_noun.txt').readlines()).strip('\n'))
+			chars.extend(word)
+		if(Size.get()<20):
+			for i in range(0,Size.get()):
+				generate.append(random.choice(chars))
+			Generate.set(''.join(generate))
+		else:
+			Generate.set("Thats tooo large :)")
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def Fill():
-	Password.set(Generate.get())
+	try:
+		Password.set(Generate.get())
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def Encrypt(a):
-	encryptmp = []
-	for x in a:
-		encryptmp.append(str(pow(ord(x),e,n)))
-	return '\t'.join(encryptmp)
+	try:
+		encryptmp = []
+		for x in a:
+			encryptmp.append(str(pow(ord(x),e,n)))
+		return '\t'.join(encryptmp)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 def Encrypt_Save():
-	User_Data = open(destination.get(), 'a+')
-	fieldnames = ['Username', 'Memo','Password']
-	User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
-	if(Password.get()!= '' and Username.get()!='' and Memo.get()!= '' and Password.get()!= 'Saved' and Password.get()!= 'Please input'):
-		plaintext=Password.get()
-		for x in plaintext:
-			cipher.append(str(pow(ord(x),e,n)))
-		User_Data_Writer.writerow({'Username':Username.get(),'Memo':Memo.get(),'Password':str('\t'.join(cipher))})
-		Password.set('Saved')
-		Username.set('Saved')
-		Memo.set('Saved')
-	else:
-		Password.set('Please input')
-		Username.set('Please input')
-		Memo.set('Please input')
-	User_Data.close()
-def Decrypt_Display(a):
-	decryption=[]
-	plaintextset=[]
-	text = a.split('\t')
-	for y in text:
-		q = int(y)
-		decryption.append(pow(q,d,n))
-	for char in decryption:
-		plaintextset.append(chr(char))
-	plaintext=''.join(plaintextset)
-	PasswordO.set(plaintext)
-def Decrypt(a):
-	decryption=[]
-	plaintextset=[]
-	text = a.split('\t')
-	for y in text:
-		q = int(y)
-		decryption.append(pow(q,d,n))
-	for char in decryption:
-		plaintextset.append(chr(char))
-	return(''.join(plaintextset))
-
-def Open_Vault():
-
-	User_Data = open(destination.get(), 'r+')
-	User_Data_Reader = csv.DictReader(User_Data)
-	personalvault.set('Users/'+logonUsername.get()+'/'+logonUsername.get()+'_Vault.csv')
-	Secret_Vault = open(personalvault.get(), 'a+') 
-	Secret_Vault_Writer = csv.DictWriter(Secret_Vault, fieldnames=['Username','Memo','Password'])
-	for row in User_Data_Reader:
-		Secret_Vault_Writer.writerow({'Username':row['Username'],'Memo':row['Memo'],'Password':Decrypt(row['Password'])})
-	Secret_Vault.close()
-	os.system(f'open {personalvault.get()}')
-def AutoFill():
-	root.clipboard_append(PasswordO.get())
-	if(PasswordO.get()==''):
-		q = SUsername.get()
-		SUsername.set("No Data to AutoFill")
-		time.sleep(1)
-		SUsername.set(q)
-	else:
-		time.sleep(3)
-		for a in PasswordO.get():
-			keyboard.press(a)
-			keyboard.release(a)
-def Logon():
-	directory = 'Users/'+logonUsername.get()
-	if(os.path.isdir(directory)):
-		destination.set(directory+'/'+logonUsername.get()+'_User.csv')
-		Logon_Data = open('Logon_Data.csv','r+')
-		logonfield = ['Username','Password']
-		Logon_Data_Reader = csv.DictReader(Logon_Data)
-		Logon_Data_Writer = csv.DictWriter(Logon_Data,fieldnames=['Username','Password'])
-		for row in Logon_Data_Reader:
-			if(logonUsername.get() == row['Username'] and logonPassword.get() == Decrypt(row['Password'])):
-				Logonf.pack_forget()
-				Mainf.grid(row = 0,column = 0,columnspan = 2)
-				generatorf.grid(row =1 , column = 0 )
-				vaultf.grid(row =1 , column = 1)
-				managerf.grid(row = 2, column =0,columnspan = 2 )
-	else:
-		logonUsername.set('Please Register!!')
-def Register():
-	directory = 'Users/'+logonUsername.get()
-	if(os.path.isdir(directory)):
-		logonUsername.set('Please Logon')
-	else:
-		os.mkdir(directory)
-		destination.set(directory+'/'+logonUsername.get()+'_User.csv')
-		Logon_Data = open('Logon_Data.csv','a+')
-		logonfield = ['Username','Password']
-		Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
-		Logon_Data_Writer.writerow({'Username':logonUsername.get(),'Password':Encrypt(logonPassword.get())})
-		Logon_Data.close()
-
-		User_Data = open(destination.get(), 'w+')
+	try:
+		User_Data = open(destination.get(), 'a+')
 		fieldnames = ['Username', 'Memo','Password']
 		User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
-		User_Data_Writer.writeheader()
+		if(Password.get()!= '' and Username.get()!='' and Memo.get()!= '' and Password.get()!= 'Saved' and Password.get()!= 'Please input'):
+			plaintext=Password.get()
+			for x in plaintext:
+				cipher.append(str(pow(ord(x),e,n)))
+			User_Data_Writer.writerow({'Username':Username.get(),'Memo':Memo.get(),'Password':str('\t'.join(cipher))})
+			Password.set('Saved')
+			Username.set('Saved')
+			Memo.set('Saved')
+		else:
+			Password.set('Please input')
+			Username.set('Please input')
+			Memo.set('Please input')
+		User_Data.close()
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
+def Decrypt_Display(a):
+	try:
+		decryption=[]
+		plaintextset=[]
+		text = a.split('\t')
+		for y in text:
+			q = int(y)
+			decryption.append(pow(q,d,n))
+		for char in decryption:
+			plaintextset.append(chr(char))
+		plaintext=''.join(plaintextset)
+		PasswordO.set(plaintext)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
+def Decrypt(a):
+	try:
+		decryption=[]
+		plaintextset=[]
+		text = a.split('\t')
+		for y in text:
+			q = int(y)
+			decryption.append(pow(q,d,n))
+		for char in decryption:
+			plaintextset.append(chr(char))
+		return(''.join(plaintextset))
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
+def Open_Vault():
+	try:
+		User_Data = open(destination.get(), 'r+')
+		User_Data_Reader = csv.DictReader(User_Data)
+		personalvault.set('Users/'+logonUsername.get()+'/'+logonUsername.get()+'_Vault.csv')
+		Secret_Vault = open(personalvault.get(), 'a+') 
+		Secret_Vault_Writer = csv.DictWriter(Secret_Vault, fieldnames=['Username','Memo','Password'])
+		for row in User_Data_Reader:
+			Secret_Vault_Writer.writerow({'Username':row['Username'],'Memo':row['Memo'],'Password':Decrypt(row['Password'])})
+		Secret_Vault.close()
+		os.system(f'open {personalvault.get()}')
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
+def AutoFill():
+	try:
+		root.clipboard_append(PasswordO.get())
+		if(PasswordO.get()==''):
+			q = SUsername.get()
+			SUsername.set("No Data to AutoFill")
+			time.sleep(1)
+			SUsername.set(q)
+		else:
+			time.sleep(3)
+			for a in PasswordO.get():
+				keyboard.press(a)
+				keyboard.release(a)
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
+def Logon():
+	try:
+		directory = 'Users/'+logonUsername.get()
+		if(os.path.isdir(directory)):
+			destination.set(directory+'/'+logonUsername.get()+'_User.csv')
+			Logon_Data = open('Logon_Data.csv','r+')
+			logonfield = ['Username','Password']
+			Logon_Data_Reader = csv.DictReader(Logon_Data)
+			Logon_Data_Writer = csv.DictWriter(Logon_Data,fieldnames=['Username','Password'])
+			for row in Logon_Data_Reader:
+				if(logonUsername.get() == row['Username'] and logonPassword.get() == Decrypt(row['Password'])):
+					Logonf.pack_forget()
+					Mainf.grid(row = 0,column = 0,columnspan = 2)
+					generatorf.grid(row =1 , column = 0 )
+					vaultf.grid(row =1 , column = 1)
+					managerf.grid(row = 2, column =0,columnspan = 2 )
+		else:
+			logonUsername.set('Please Register!!')
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
+def Register():
+	try:
+		directory = 'Users/'+logonUsername.get()
+		if(os.path.isdir(directory)):
+			logonUsername.set('Please Logon')
+		else:
+			os.mkdir(directory)
+			destination.set(directory+'/'+logonUsername.get()+'_User.csv')
+			Logon_Data = open('Logon_Data.csv','a+')
+			logonfield = ['Username','Password']
+			Logon_Data_Writer = csv.DictWriter(Logon_Data, fieldnames=logonfield)
+			Logon_Data_Writer.writerow({'Username':logonUsername.get(),'Password':Encrypt(logonPassword.get())})
+			Logon_Data.close()
+	
+			User_Data = open(destination.get(), 'w+')
+			fieldnames = ['Username', 'Memo','Password']
+			User_Data_Writer = csv.DictWriter(User_Data, fieldnames=fieldnames)
+			User_Data_Writer.writeheader()
+	except:
+		print("Sorry! An Error Occured\nError Code 0x1f4d44\nPlease contact DEVELOPER!")
+		random_password_generator_ico()
 #Frame Creation and Configure
 generatorf = Frame(root)
 generatorf.configure(background = Bone)
