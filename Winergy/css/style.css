@@ -116,7 +116,9 @@ ul .dropdown-menu {
 
 .intro{
 	padding-bottom: 150px;
-
+}
+.problem{
+	padding-bottom: 0px;
 }
 .intro p{
   margin-top: 60px;
@@ -135,7 +137,7 @@ h1{
 }
 .explanation{
 text-align: center;
-background:greenyellow;
+background:rgba(180,242,65,0.6);
 margin: 0;
 padding-top: 40px;
 padding-bottom: 50px;
@@ -159,11 +161,11 @@ margin-top: 0px;
 #Solutions{
 	gird-row:1;
 	grid-column:2;
-	background-image:url('../images/header.jpg');
+	background-image:url('../images/windturbine.jpeg');
 	
 }
 .smallview .intro{
-	padding-bottom: 240px;
+	padding-bottom: 232px;
 
 }
 .smallview h1{
@@ -172,3 +174,11 @@ margin-top: 0px;
 .smallview .learnmore{
 	color:black;
 }
+.block_text{
+width: 50%;	
+}
+.smallview .explanation{
+	background:rgba(20,244,122,1);
+}
+
+
