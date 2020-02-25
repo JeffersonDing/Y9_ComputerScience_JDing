@@ -135,7 +135,7 @@ ul .dropdown-menu {
 }
 .intro p{
   margin-top: 60px;
-	padding-bottom: 40px;
+	padding-bottom: 140px;
 }
 .learnmore{
   border-radius: 25px;
@@ -202,6 +202,28 @@ width: 50%;
 	padding-left: 80px;
 	padding-right:80px;
 }
+.body-left{
+	grid-row:1;
+	grid-column:1;
+}
+.sidebar-right{
+	grid-row:1;
+	grid-column:2;
+	line-height: 60px;
+}
+.charts{
+	grid-row:2;
+	grid-column:1;
+}
+.impact{
+	grid-row:2;
+	grid-column:2;
+	font-size:18px;
+}
+.stats{
+	grid-row:3;
+	grid-column:2;
+}
 .body-left h2{
 font-size: 40px;
 line-height: 40px;
@@ -240,4 +262,20 @@ margin-bottom: 20px;
 }
 .ungoal p{
 	margin-top: 0px;
+	margin-right:500px;
+	padding-bottom:60px;
+	
+	
+}
+.ungoal{
+	
+}
+
+.ungoal {
+	padding-bottom:0px;
+}
+
+.ungoal h1 {
+	font-size:60px;
+	margin-right: 800px;
 }
