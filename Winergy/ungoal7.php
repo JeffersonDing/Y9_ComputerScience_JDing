@@ -1,3 +1,6 @@
+<?php
+include_once( "./includes/Connection.php" )
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Winergy®</title>
 <link href="css/style.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script> 
 </head>
 <body>
 <div id="ungoal7">
@@ -17,7 +20,7 @@
         <li> <a href="./The_Problem.html">The Problem</a> </li>
         <li >
           <div class="dropdown">
-             <button class="dropbtn" onclick="myFunction()">UN Goals </button>
+            <button class="dropbtn" onclick="myFunction()">UN Goals </button>
             <div class="dropdown-content" id="myDropdown"> <a href="./ungoal7.html">Goal 7</a> <a href="./ungoal11.html">Goal 11</a> </div>
           </div>
         </li>
@@ -57,23 +60,98 @@
           net operational savings</div>
       </div>
     </div>
-    
   </div>
-	<div class="impact"><span class="impact-label">Impact: </span>For offshore wind, growing from .1 percent to 4 percent could avoid 14.1 gigatons of emissions. At a combined cost of $1.8 trillion, wind turbines can deliver net savings of $8.2 trillion over three decades of operation. These are conservative estimates, however. Costs are falling annually and new technological improvements are already being installed, increasing capacity to generate more electricity at the same or lower cost.
-	<br/><br/><br/><br/><br/>
-		<div>Summary:</div>
-		<div class="stat"><span class="stat-value">14.1</span><span class="stat-unit"> gigatons</span><br>
-          reduced CO2</div>
-        <div class="stat"><span class="stat-value">$545.3</span><span class="stat-unit"> Billion</span><br>
-          net implementation cost</div>
-        <div class="stat"><span class="stat-value">$762.5</span><span class="stat-unit"> Billion</span><br>
-          net operational savings</div>
-	</div>
-	<div class="charts">
-		<canvas id="myChart" width="400" height="200"></canvas>
-	</div>
-	
-</div>	
+  <div class="impact"><span class="impact-label">Impact: </span>For offshore wind, growing from .1 percent to 4 percent could avoid 14.1 gigatons of emissions. At a combined cost of $1.8 trillion, wind turbines can deliver net savings of $8.2 trillion over three decades of operation. These are conservative estimates, however. Costs are falling annually and new technological improvements are already being installed, increasing capacity to generate more electricity at the same or lower cost. <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div>Summary:</div>
+    <div class="stat"><span class="stat-value">14.1</span><span class="stat-unit"> gigatons</span><br>
+      reduced CO2</div>
+    <div class="stat"><span class="stat-value">$545.3</span><span class="stat-unit"> Billion</span><br>
+      net implementation cost</div>
+    <div class="stat"><span class="stat-value">$762.5</span><span class="stat-unit"> Billion</span><br>
+      net operational savings</div>
+  </div>
+<div class="charts">
+    <canvas id="myChart" width="400" height="200"></canvas>
+  </div>
+  <?php
+	$timesql = "SELECT Time FROM cleanenergy WHERE Area = 'World';";
+  $result = mysqli_query( $conn, $timesql );
+  while ( $row = mysqli_fetch_assoc( $result ) ) {
+    $Time[] = $row[ 'Time' ];
+  }
+  $sql = "SELECT Percentage FROM cleanenergy WHERE Area = 'World';";
+  $result = mysqli_query( $conn, $sql );
+  while ( $row = mysqli_fetch_assoc( $result ) ) {
+    $World[] = $row[ 'Percentage' ];
+  }
+  $Africasql = "SELECT Percentage FROM cleanenergy WHERE Area='Africa';";
+  $result = mysqli_query( $conn, $Africasql );
+  while ( $row = mysqli_fetch_assoc( $result ) ) {
+    $Africa[] = $row[ 'Percentage' ];
+  }
+  $NAMsql = "SELECT Percentage FROM cleanenergy WHERE Area='Americas';";
+  $result = mysqli_query( $conn, $NAMsql );
+  while ( $row = mysqli_fetch_assoc( $result ) ) {
+    $NorthAmerica[] = $row[ 'Percentage' ];
+  }
+
+  ?>
+  <script>
+	var Time = <?php echo json_encode($Time);?>;
+	Time=Time.map(Number);
+	var World = <?php echo json_encode($World);?>;
+	for(var i=0;i<World.length;i++){
+		World[i]=parseFloat(World[i])
+	}
+	var Africa = <?php echo json_encode($Africa);?>;
+	for(var i=0;i<Africa.length;i++){
+		Africa[i]=parseFloat(Africa[i])
+	}
+	var NorthAmerica = <?php echo json_encode($NorthAmerica);?>;
+	for(var i=0;i<NorthAmerica.length;i++){
+		NorthAmerica[i]=parseFloat(NorthAmerica[i])
+	}
+	var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: Time,
+    datasets: [
+		{ 
+		label:"North America Percentage",
+        data: NorthAmerica,
+		backgroundColor:'rgba(0,139,248,0.6)'
+      },
+      { 
+		label:"World Percentage",
+        data: World,
+		backgroundColor:'rgba(4,231,98,0.5)'
+      },
+		{ 
+		label:"Africa Percentage",
+        data: Africa,
+		backgroundColor:'rgba(245,183,0,0.4)'
+      }
+		
+    ]
+  },
+	options: {
+        title: {
+            display: true,
+            text: 'Renewable energy share in the total final energy consumption (%)',
+			fontSize:21,
+			
+        }
+    }
+});
+
+</script>
+  
+</div>
 <footer>
   <div class="small">
     <p>Copyright &copy; jeffersonucc.github.io</p>
