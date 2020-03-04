@@ -53,4 +53,17 @@ function showSlides(n) {
 	}
 
 }
-
+var yvalue ;
+window.addEventListener("scroll", function (event) {
+	document.querySelector("#bg-modal").style.display="none";
+    yvalue = this.scrollY;
+});
+function expand(){
+	document.querySelector("#bg-modal").style.top=`${yvalue}px`;
+	document.querySelector("#bg-modal").style.display="flex";
+}
+function close(){
+	document.querySelector("#bg-modal").style.display="none";
+}
+document.getElementById("windspeed").addEventListener("click",expand)
+document.querySelector("#close").addEventListener("click",close)
