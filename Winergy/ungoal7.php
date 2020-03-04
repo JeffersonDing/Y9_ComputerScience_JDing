@@ -1,5 +1,5 @@
 <?php
-include_once( "./includes/Connection.php" )
+include_once( "./includes/Connection.php" );
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,8 @@ include_once( "./includes/Connection.php" )
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Winergy®</title>
 <link href="css/style.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script> 
+<link rel="stylesheet" href="https://use.typekit.net/bjd5jat.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </head>
 <body>
 <div id="ungoal7">
@@ -37,51 +38,61 @@ include_once( "./includes/Connection.php" )
 </div>
 <div class="text-grid-container">
   <div class="body-left">
-    <h2>Electricity Generation</h2>
-    <h1>Wind Turbines (Offshore)</h1>
-    <div class="caption"> An athlete swims past the Sheringham Shoal Offshore Wind Farm off the coast of Norfolk, England. The wind farm consists of 88 Siemens 3.6 megawatt turbines placed over a 35-square kilometer area, 11 miles from shore. </div>
+    <h2>United Nations</h2>
+    <h1>Sustainable Development Goal #7</h1>
     <div class="description">
-      <p>Wind energy is at the crest of initiatives to address global warming in the coming three decades. Investment in offshore wind was $29.9 billion in 2016, 40 percent greater than the prior year.</p>
-      <p>32 turbines—each double the height of the Statue of Liberty—have been installed off the coast of Liverpool, England. Owned by Lego, the toy maker, this is an international effort: The blades are made on the Isle of Wight by a Japanese company for its Danish client, Vestas. Each turbine generates 8 megawatts of electricity; together, they will supply all 466,000 inhabitants of Liverpool.</p>
-      <p>The wind industry is marked by a proliferation of turbines, dropping costs, and heightened performance. In many locales, wind is either competitive with or less expensive than coal-generated electricity—and it has no fuel costs and no pollution. Yet, not-in-my-backyard sentiment remains an obstacle in many places.</p>
-      <p>The variable nature of wind means there are times when turbines are not turning. Wind energy, like other sources of energy, is part of a system. Investment in 24-7 renewables such as geothermal, energy storage, transmission infrastructure, and distributed generation is essential to its growth.</p>
+      <p>Energy is central to nearly every major challenge and opportunity the world faces today. Be it for jobs, security, climate change, food production or increasing incomes, access to energy for all is essential. Working towards this goal is especially important as it interlinks with other Sustainable Development Goals. Focusing on universal access to energy, increased energy efficiency and the increased use of renewable energy through new economic and job opportunities is crucial to creating more sustainable and inclusive communities and resilience to environmental issues like climate change.</p>
+      <p>At the current time, there are approximately 3 billion people who lack access to clean-cooking solutions and are exposed to dangerous levels of air pollution. Additionally, slightly less than 1 billion people are functioning without electricity and 50% of them are found in Sub-Saharan Africa alone. Fortunately, progress has been made in the past decade regarding the use of renewable electricity from water, solar and wind power and the ratio of energy used per unit of GDP is also declining.</p>
+      <p>However, the challenge is far from being solved and there needs to be more access to clean fuel and technology and more progress needs to be made regarding integrating renewable energy into end-use applications in buildings, transport and industry. Public and private investments in energy also need to be increased and there needs to be more focus on regulatory frameworks and innovative business models to transform the world’s energy systems.</p>
+      
     </div>
   </div>
   <div class="sidebar-right">
     <div class="ranking-results">
-      <div class="rank-number"> <sup>#</sup>22 </div>
-      <div class="rank-desc"> Rank and Results by 2050 </div>
+      <div class="rank-number"> <sup>#</sup>7 </div>
+      <div class="rank-desc"> Facts and Figures </div>
       <div class="rank-stats">
-        <div class="stat"><span class="stat-value">14.1</span><span class="stat-unit"> gigatons</span><br>
-          reduced CO2</div>
-        <div class="stat"><span class="stat-value">$545.3</span><span class="stat-unit"> Billion</span><br>
-          net implementation cost</div>
-        <div class="stat"><span class="stat-value">$762.5</span><span class="stat-unit"> Billion</span><br>
-          net operational savings</div>
+        <div class="stat"><span class="stat-value">13</span><span class="stat-unit"> Percent</span><br>
+         Global population still lacks access to modern electricity.</div>
+        <div class="stat"><span class="stat-value">3</span><span class="stat-unit"> Billion</span><br>
+          People rely on wood, coal, charcoal or animal waste for cooking and heating</div>
+        <div class="stat"><span class="stat-value">17.5</span><span class="stat-unit"> Percent</span><br>
+          Renewable energy in final energy consumption</div>
       </div>
     </div>
   </div>
-  <div class="impact"><span class="impact-label">Impact: </span>For offshore wind, growing from .1 percent to 4 percent could avoid 14.1 gigatons of emissions. At a combined cost of $1.8 trillion, wind turbines can deliver net savings of $8.2 trillion over three decades of operation. These are conservative estimates, however. Costs are falling annually and new technological improvements are already being installed, increasing capacity to generate more electricity at the same or lower cost. <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <div>Summary:</div>
-    <div class="stat"><span class="stat-value">14.1</span><span class="stat-unit"> gigatons</span><br>
-      reduced CO2</div>
-    <div class="stat"><span class="stat-value">$545.3</span><span class="stat-unit"> Billion</span><br>
-      net implementation cost</div>
-    <div class="stat"><span class="stat-value">$762.5</span><span class="stat-unit"> Billion</span><br>
-      net operational savings</div>
-  </div>
-<div class="charts">
+	<div clas="summary">
+    <div class="impact-label">Targets:</div>
+    <div class="stat">
+		7.1 By 2030, ensure universal access to affordable, reliable and modern energy services</div>
+<div class="stat">
+7.2 By 2030, increase substantially the share of renewable energy in the global energy mix</div>
+<div class="stat">
+7.3 By 2030, double the global rate of improvement in energy efficiency</div>
+<div class="stat">
+7.A By 2030, enhance international cooperation to facilitate access to clean energy research and technology, including renewable energy, energy efficiency and advanced and cleaner fossil-fuel technology, and promote investment in energy infrastructure and clean energy technology</div>
+<div class="stat">
+7.B By 2030, expand infrastructure and upgrade technology for supplying modern and sustainable energy services for all in developing countries, in particular least developed countries, small island developing States, and land-locked developing countries, in accordance with their respective programmes of support
+</div>
+	</div>
+  <div class="charts">
     <canvas id="myChart" width="400" height="200"></canvas>
-  </div>
-  <?php
-	$timesql = "SELECT Time FROM cleanenergy WHERE Area = 'World';";
+    <div class="addRegion">
+	
+</div>
+	
+ 
+
+<?php
+  $timesql = "SELECT Time FROM cleanenergy WHERE Area = 'World';";
   $result = mysqli_query( $conn, $timesql );
   while ( $row = mysqli_fetch_assoc( $result ) ) {
     $Time[] = $row[ 'Time' ];
+  }
+	$areasql = "SELECT Area FROM cleanenergy;";
+  $result = mysqli_query( $conn, $areasql );
+  while ( $row = mysqli_fetch_assoc( $result ) ) {
+    $Area[] = $row['Area'];
   }
   $sql = "SELECT Percentage FROM cleanenergy WHERE Area = 'World';";
   $result = mysqli_query( $conn, $sql );
@@ -98,9 +109,8 @@ include_once( "./includes/Connection.php" )
   while ( $row = mysqli_fetch_assoc( $result ) ) {
     $NorthAmerica[] = $row[ 'Percentage' ];
   }
-
   ?>
-  <script>
+<script>
 	var Time = <?php echo json_encode($Time);?>;
 	Time=Time.map(Number);
 	var World = <?php echo json_encode($World);?>;
@@ -115,29 +125,35 @@ include_once( "./includes/Connection.php" )
 	for(var i=0;i<NorthAmerica.length;i++){
 		NorthAmerica[i]=parseFloat(NorthAmerica[i])
 	}
-	var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: Time,
-    datasets: [
+	  
+
+</script>
+<script>
+var bgcolorset=['rgba(0,139,248,0.4)','rgba(4,231,98,0.4)','rgba(245,183,0,0.4)','rgba(145,78,97,0.5)','rgba(77,19,245,0.3)','rgba(17,138,178,0.4)','rgba(6,214,160,0.4)','rgba(252,68,15,0.4)',]
+var dataset = [
 		{ 
-		label:"North America Percentage",
+		label:"North America",
         data: NorthAmerica,
-		backgroundColor:'rgba(0,139,248,0.6)'
+		backgroundColor:'rgba(0,139,248,0.4)'
       },
       { 
-		label:"World Percentage",
+		label:"World",
         data: World,
-		backgroundColor:'rgba(4,231,98,0.5)'
+		backgroundColor:'rgba(4,231,98,0.4)'
       },
 		{ 
-		label:"Africa Percentage",
+		label:"Africa",
         data: Africa,
 		backgroundColor:'rgba(245,183,0,0.4)'
       }
 		
     ]
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: Time,
+    datasets: dataset
   },
 	options: {
         title: {
@@ -148,9 +164,50 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
+</script>     
+        <form action=""<?php $_PHP_SELF ?>"" method="GET">
+        Add Compare Source:<select id="regions" name="area"></select>
+		<button type="submit" id="addarea" >Add!</button>
+        </form>
+    </div>
+<script>
+document.getElementById("addarea").addEventListener("click",addRegion(),false);
+function addData(chart, inlabel, indata) {
+   dataset.push({label:inlabel,data:indata,backgroundColor:bgcolorset[Math.floor(Math.random() * bgcolorset.length)]});
+    chart.update();
+}
+function addRegion(){
+	<?php
+	$addsql = "SELECT Percentage FROM cleanenergy WHERE Area ='{$_GET['area']}';";
+  $result = mysqli_query( $conn, $addsql );
+  while ( $row = mysqli_fetch_assoc( $result ) ){
+    $addData[] = $row[ 'Percentage' ];
+  }
+	  ?>
+  }
+	var addOn = <?php echo json_encode($addData);?>;
+	for(var i=0;i<addOn.length;i++){
+		addOn[i]=parseFloat(addOn[i])
+	}
+var lable='<?php 
+	if(isset($_GET['area'])){
+	echo $_GET['area'];}?>'
+addData(myChart,lable,addOn);
 </script>
-  
+  </div>
+
+<script>
+var options = <?php echo json_encode($Area);?>;
+let unique = [...new Set(options)];
+var select = document.getElementById("regions"); 
+for(var i = 0; i < unique.length; i++) {
+    var opt = unique[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}		  
+</script>
 </div>
 <footer>
   <div class="small">

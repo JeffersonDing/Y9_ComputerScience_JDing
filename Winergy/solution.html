@@ -1,10 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Untitled Document</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winergy®</title>
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/bjd5jat.css">
 </head>
-
 <body>
+<div id="topsolution">
+  <nav id="siteNav" class="navbar" >
+    <div id="navbar">
+      <ul id="ulnavbar">
+        <li> <a class="logo" href="./index.html"> <img id="logo" src="images/Colab.png" alt="Logo"/></a> </li>
+        <li class="active"> <a href="./index.html">Home</a> </li>
+        <li> <a href="./The_Problem.html">The Problem</a> </li>
+        <li >
+          <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">UN Goals </button>
+            <div class="dropdown-content" id="myDropdown"> <a href="ungoal7.php">Goal 7</a> <a href="./ungoal11.html">Goal 11</a> </div>
+          </div>
+        </li>
+        <li> <a href="./solution.html">Solutions</a> </li>
+      </ul>
+    </div>
+  </nav>
+  <center>
+    <div class="industry intro">
+      <h1>Industry Solutions</h1>
+      <p>Industry Solutions for Affordable and Clean Wind Energy.</p>
+    </div>
+  </center>
+</div>
+<div class="text-grid-container">
+  <div class="body-left">
+    <h2>Industry Solutions</h2>
+	  <h1>Outline of Major Solutions</h1>
+	  <p>Wind turbines are often located in places that have less or minor human activity due to the huge noise that wind turbines cause. Wind turbines can produce unwanted sound (referred to as noise) during operation. The nature of the sound depends on the design of the wind turbine. (Ellenbogen,2012). Although many companies tried to design new wind turbines to integrate into smaller towns and even cities the noise could not be controlled under an acceptable level. These wind turbines that are distant to us humans constantly need to be inspected and checked as wind is changing all the time and overtime components on the wind turbine could wear out because of special cases.
+</p>
+	  <p>A wind turbine is composed of these main components: the blades, the main barring, the main shaft, the gear case, the electrical generator and the airbrake. All of these are potential threats to the wind turbine and could be damaged easily as a wind turbine is often suspended at least 150 meters above the ground and up at that altitude, wind speed has a significantly higher speed that on the ground. Wind turbines has to regulate itself by changing the parameters of its system. An anemometer is always present on a wind turbine that could tell the wind turbine the wind speed and direction and the turbine could either adjust its yaw system or its variable pitch. The yaw system is to control the horizontal pan of the wind turbine so it could always point at the direction of the wind flow so no pressure is created on the side of the blades which creates tension on the main shaft; the variable pitch system controls the blades(often three), if the wind speed is low, three blades will turn outwards which creates a bigger contact area with airflow this spins faster and if the wind is too fast the blades will do vice versa.
+</p>
+	  <p>These basic automations on the wind turbines is not enough to support the goal of 20 years with only 4 maintenance per year or one each quarter, more sensors need to be added to monitor the status and trend each component. In the solution I researched, the wind turbine could see, hear and feel itself. With temperature sensors on each component, the wind turbine could monitor the heat produced by each part and determine what active change it should do to its system parameters to avoid parts overheating; with sound monitoring, the sound produced by each individual blade could be monitored and the system could know the wind contact status; the vibration sensors could gather vibration and location dimensions to determine whether the blades are too stressed or even wobbling off the main shaft etc.. 
+</p>
+	  <p>Using AI technology and Machine learning, the computing system could gather the data from the thermal sensor, anemometer, vibration sensor, acoustic sensor and train a healthy model of the wind turbine and understand which change of the parameters could result in the wind turbine closer to the healthiest state. Using a 5G network connection between wind turbines all over the region the AI trained model could reproduce and improve itself over time to create an even more accurate model. Using such technology could improve the efficiency of the wind turbine and constantly trying to fix itself to its optimal state makes it much easier to maintain over time. High above ground level, at a height of about 1 kilometre, the wind is hardly influenced by the surface of the earth at all. In the lower layers of the atmosphere, however, wind speeds are affected by the friction against the surface of the earth. ( Danish Wind Industry Association,2003) Wind shear(figure on the right) is when there is a difference in speed between different altitudes when a traditional wind turbine encounters this problem, all three blades would not work in optimal condition due to it could only be measured and altered as a whole but using the AI model, the wind turbine is able to change the variable pitch of each blade so it gives the least stress on the main shaft and bearing.
+</p>
+	  <p>Offshore and onshore wind farms are often the biggest wind energy producers and a manageable and highly efficient array of wind turbines is required. Using 5G, all wind turbines are connected to each other and to a central server so that they could communicate with each other and work together to produce the most energy. Wind turbines extract energy from the wind and downstream there is a wake from the wind turbine, where wind speed is reduced. (“Wake Effect”,2012) This kind of wake effect will reduce the energy produced by the wind farm and decrease efficiency. Using modern AI, wind turbine could communicate to each other to yaw the system to the left or right by a small degree, although the energy produced by that one single wind turbine might decrease by a bit, the total energy generated will always maintain a maximum according to the trained model.
+</p>
+</div>
+	  <div id="recomended">
+    <h1>Recomended Solutions</h1>
+    <div class="selection">
+  <span class="indext" onclick="currentSlide(1)">Envision</span>
+  <span class="indext" onclick="currentSlide(2)">Vestas</span>
+  <span class="indext" onclick="currentSlide(3)">WES</span>
+</div>
+<div class="slideshow-container">
+  <div class="mySlides fade">
+    <div class="numbertext">1 / 3</div>
+	  <a href="https://www.envision-group.com/en/windturbines.html" target="_blank"><img src="./images/Envision.png" style="width:100%" alt="Env"></a>
+  </div>
+
+  <div class="hide mySlides fade">
+    <div class="numbertext">2 / 3</div>
+    <a href="https://www.vestas.com/en/products#!" target="_blank"><img src="./images/Vasta.png" style="width:100%" alt="Vas" ></a>
+  </div>
+
+  <div class="hide mySlides fade">
+    <div class="numbertext">3 / 3</div>
+    <a href="https://windenergysolutions.nl/" target="_blank"><img src="./images/VES.png" style="width:100%" alt="Wes"></a>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+</div>
+
+
+  <div class="sidebar-right">
+    <div class="ranking-results">
+      <div class="rank-number"> <sup>#</sup>22 </div>
+      <div class="rank-desc"> Ranked in all Clean Energy Solutions </div>
+      <div class="rank-stats">
+        <div class="stat"><span class="stat-value">14.1</span><span class="stat-unit"> gigatons</span><br>
+          reduced CO2</div>
+        <div class="stat"><span class="stat-value">$545.3</span><span class="stat-unit"> Billion</span><br>
+          net implementation cost</div>
+        <div class="stat"><span class="stat-value">$762.5</span><span class="stat-unit"> Billion</span><br>
+          net operational savings</div>
+		  
+      </div><br/>
+		<img class="sideimages" id="windspeed" src="images/WindSpeed.jpg" alt="Wind Speed">
+		<p>Wind Speed Diagram</p>
+    </div>
+	
+  </div>
+	  <div id="company">
+    <div id="label">Envision Group: </div><br/><div id="impact" class="impact">For offshore wind, growing from .1 percent to 4 percent could avoid 14.1 gigatons of 
+emissions. At a combined cost of $1.8 trillion, wind turbines can deliver net savings of $8.2 trillion over three decades of operation. These are conservative estimates, however. Costs are falling annually and new technological improvements are already being installed, increasing capacity to generate more electricity at the same or lower cost.</div>
+</div>
+</div>
+<footer>
+  <div class="small">
+    <p>Copyright &copy; jeffersonucc.github.io</p>
+  </div>
+</footer>
+<script src="./js/script.js" type="text/javascript"></script>
 </body>
 </html>

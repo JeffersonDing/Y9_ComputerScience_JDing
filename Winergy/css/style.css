@@ -2,7 +2,7 @@ html,
 body {
     width: 100%;
     height: 100%;
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family:roboto,sans-serif;
 }
 ul {
   list-style-type: none;
@@ -33,6 +33,16 @@ a:focus {
 p {
     font-size: 16px;
     line-height: 1.5;
+	text-indent: 30px;
+	margin-top: 25px;
+}
+p::first-letter {
+font-size: 130%;
+font-weight:550;
+}
+.small p::first-letter{
+	font-size: 16px;
+    font-weight: 500;
 }
 #logo{
 	padding:0px;
@@ -135,7 +145,7 @@ ul .dropdown-menu {
 }
 .intro p{
   margin-top: 60px;
-	padding-bottom: 140px;
+	padding-bottom: 30px;
 }
 .learnmore{
   border-radius: 25px;
@@ -163,14 +173,14 @@ margin-top: 0px;
 }
 .smallview{
 	display:grid;
-	grid-template-columns:auto auto;
+	grid-template-columns:50% 50%;
 }
 #unGoals{
 	grid-row: 1;
 	grid-column: 1;
 	background-image:url('../images/English SDG logo withUN emblem and SDG Wheel/SDG Wheel PRINT AND WEB/SDG Wheel WEB/SDG Wheel_WEB.png');
 	background-repeat: no-repeat;
-	background-size: 100% 78%;
+	background-size: 98% 69%;
 }
 #Solutions{
 	gird-row:1;
@@ -197,7 +207,7 @@ width: 50%;
 }
 .text-grid-container{
 	display:grid;
-	grid-template-columns:80% 20%;
+	grid-template-columns:75% 25%;
 	grid-gap: 50px;
 	padding-left: 80px;
 	padding-right:80px;
@@ -209,16 +219,16 @@ width: 50%;
 .sidebar-right{
 	grid-row:1;
 	grid-column:2;
-	line-height: 60px;
+	line-height: 30px;
 }
 .charts{
 	grid-row:2;
 	grid-column:1;
 }
 .impact{
-	grid-row:2;
-	grid-column:2;
 	font-size:18px;
+	line-height: 30px;
+	
 }
 .stats{
 	grid-row:3;
@@ -279,3 +289,156 @@ margin-bottom: 20px;
 	font-size:60px;
 	margin-right: 800px;
 }
+
+.addRegion {
+	grid-row:2;
+	gird-column:1;
+}
+
+.text-light {
+	padding-left: 30px;
+	padding-right: 30px;
+	
+}
+
+#special_light {
+	padding-top: 42px;
+padding-bottom: 6px;
+}
+
+.impact-label {
+	font-weight: bold;
+}
+
+.summary {
+	grid-row: 2;
+	grid-column:2;
+}
+
+.stat-value {
+	font-size: 32px;
+}
+
+.stat-unit {
+	font-weight: lighter;
+}
+
+.stat {
+	padding-bottom: 20px;
+}
+#topsolution{
+	background-image:url('../images/solutions.jpeg');
+}
+.industry h1{
+	margin-right: 300px;
+}
+
+.industry p {
+	margin-right: 200px;
+}
+
+.industry {
+	padding-bottom: 110px;
+}
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+.hide{
+	display:none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.selection {
+	text-align: center;
+	padding-bottom: 20px;
+}
+.indext{
+	cursor: pointer;
+	font-family:roboto, sans-serif; 
+	font-weight: 500; 
+	font-size: 40px;
+	padding-left: 40px;
+	padding-right: 40px;
+	color:grey;
+}
+.selection .active{
+	animation-name: active;
+  	animation-duration: 1.5s;
+	background-color:rgba(0,0,0,0.1);
+	border-radius: 30px;
+	font-weight: 700;
+	color:black;
+}
+@keyframes active{
+	from{color:grey;background-color: inherit;}
+	to{color:black;background-color: rgba(0,0,0,0.1);
+border-radius: 30px;}
+}
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+#label{
+font-size: 25px;
+
+font-weight: 700;
+}
+
+#recomended {
+	grid-row:2;
+	grid-column:1;
+}
+
+#company {
+	gird-row:2;
+	grid-column:2;
+}
+
+#recomended h1{
+	margin-top: 0px;
+}
+
+.sideimages {
+	width:100%;
+}
+
+#windspeed {
+	padding-top: 400px;
+}
+
+
