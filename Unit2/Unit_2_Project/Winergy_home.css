@@ -1,0 +1,72 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#logo{
+	padding-left: 0px;
+	height:120px;
+	width:340px;
+	float:left;
+}
+#navbar{
+	list-style-type:none;
+	background:blue;
+	
+	
+}
+
+#navbar li{
+padding:0px;
+	color:cyan;
+padding-left:10px;
+height:120px;
+font-size:30px;
+display: inline-block;
+}
+
+#title{
+font-size:80px;
+	align-content: center;
+	padding-left:500px;
+	padding-top: 20px;
+	margin-top:0px;
+}
+body { 
+  display: grid;
+ 
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  height: 100vh;
+  margin: 0;
+  }  
+header, footer, article, nav, div {
+  padding: 1.2em;
+  background: gold;
+  }
+#pageHeader {
+  grid-area: header;
+  }
+#pageFooter {
+  grid-area: footer;
+  }
+#mainArticle { 
+  grid-area: article;      
+  }
+#mainNav { 
+  grid-area: nav; 
+  }
+#siteAds { 
+  grid-area: ads; 
+  } 
+/* Stack the layout on small devices/viewports. */
+@media all and (max-width: 575px) {
+  body { 
+    grid-template-areas: 
+      "header"
+      "article"
+      "ads"
+      "nav"
+      "footer";
+  
+ }
+}
+

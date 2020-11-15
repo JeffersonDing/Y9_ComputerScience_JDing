@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<style>
+
+		body {
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+		.parallaxA {
+		  /* The image used */
+		  background-image: url("images/1_Hydrogen.jpg");
+
+		  /* Set rules to fill background */
+		  	  min-height: 800px; 
+
+	
+		  /* Set up proportionate scaling */
+	
+		  /* Create the parallax scrolling effect */
+		  background-attachment: fixed;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: auto;
+		}
+
+			.parallaxB {
+		  /* The image used */
+		  background-image: url("images/2_Helium.jpg");
+
+		  /* Set a specific height */
+			  min-height: 800px; 
+
+
+		  /* Create the parallax scrolling effect */
+		  background-attachment: fixed;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: auto;
+		}
+
+		.parallaxC {
+		  /* The image used */
+		  background-image: url("images/3_Lithium.jpg");
+
+		  /* Set a specific height */
+		  min-height: 800px; 
+
+		  /* Create the parallax scrolling effect */
+		  background-attachment: fixed;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: auto;
+		}
+
+		#mySidenav a {
+		  position: fixed;
+		  left: -300px;
+		  transition: 0.3s;
+		  padding: 15px;
+		  width: 300px;
+		  text-decoration: none;
+		  font-size: 20px;
+		  color: white;
+		  border-radius: 0 5px 5px 0;
+		  height: 200px;
+		}
+
+		#mySidenav a:hover {
+		  left: 0;
+		}
+
+		#about {
+		  top: 300px;
+		  background-color: #4CAF50;
+		}
+
+</style>
+
+</head>
+<body>
+
+
+<div id="mySidenav" class="sidenav">
+  		<a href="#" id="about">About</a>
+ </div>
+
+
+<div class="parallaxA"></div>
+
+
+
+<div class="parallaxB"></div>
+
+
+
+<div class = "parallaxC"></div>
+
+<script>
+	window.addEventListener("scroll", myScript);
+	document.getElementById("parallaxA").style.height = window.innerHeight
+
+	//The onbeforeload section I got from the below site. 
+	//https://stackoverflow.com/questions/3664381/force-page-scroll-position-to-top-at-page-refresh-in-html/39015137
+	window.onbeforeunload = function () {
+	  window.scrollTo(0, 0);
+
+	}
+
+	document.getElementById("about").style.background = "#9BD9F0"	
+
+
+	function myScript() {
+
+		console.log("scrolling");
+
+		//This is a line of code I took from StackOverflow.  
+		//https://stackoverflow.com/questions/11373741/detecting-by-how-much-user-has-scrolled
+		var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		console.log(scrollTop)
+		var winWidth = window.innerWidth
+		console.log(winWidth)
+		if (scrollTop < winWidth/3) {
+			document.getElementById("about").style.background = "#9BD9F0"	
+
+			text = "<pre>Symbol: H\nAtomic mass: 1.00784\nAtomic number: 1\nElectrons per shell: 1\nElectronegativity: 2.2\nIsotopes:\n\tDeuterium\n\tTritium\n</pre>"
+			document.getElementById("about").innerHTML = text;
+		}
+		else if (scrollTop < 2*winWidth/3) {
+			text = "<pre>Symbol: He\nAtomic number: 2\nElectrons per shell: 2\nMelting point: -272.2 °C\nDiscoverers:\n\tPierre Janssen\n\tNorman Lockyer\t</pre>"
+			document.getElementById("about").innerHTML = text;
+			document.getElementById("about").style.background = "#E37564";
+		}
+		else if (scrollTop >= 2*winWidth/3) {
+			document.getElementById("about").style.background = "#C4C4C4";
+
+			text = "<pre>Symbol: Li\nAtomic number:\nAtomic mass: 6.941\nMolar mass: 6.941 g/mol\nElectrons per shell: 2,1\nFormula: Li+</pre>"
+			document.getElementById("about").innerHTML = text;
+	
+		}
+	
+
+	}
+
+
+
+</script>
+</body>
+</html>
